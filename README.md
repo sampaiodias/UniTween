@@ -5,7 +5,7 @@ UniTween is a personal Tween framework for the games I make (mainly mobile games
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
 * Import Odin - Inspector and Serializer to your project (version 1.0.6.1 or higher)
-* Download the latest .unitypackage file [from the Packages folder](https://github.com/sampaiodias/UniTween/tree/master/Unity Packages) and open it on your project.
+* Download the latest .unitypackage file [from the Packages folder](https://github.com/sampaiodias/UniTween/tree/master/Unity%20Packages) and open it on your project.
 
 ## Special Thanks
 * [Sirenix](http://sirenix.net/odininspector/) for their amazing support for Odin
