@@ -27,7 +27,7 @@ UniTween is a Tween framework for Unity that enables programmers and artists to 
 8. To play the Sequence, call it using the Play() or Play(string id) methods. With an ID you don't need a direct reference to the object that contains the UniTween Sequence component (don't forget to set the ID on the UniTween Sequence component).
 9. OPTIONAL: You can set the other options such as loops and automatic play on the UniTween Sequence aswell.
 
-If can check the [Examples folder of this repository](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more about how to use UniTween. A video tutorial is also coming soon.
+If can check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween. A video tutorial is also coming soon.
 
 For more information about specific tweens and how to use them, [please refer to DOTween's official documentation](http://dotween.demigiant.com/documentation.php).
 
