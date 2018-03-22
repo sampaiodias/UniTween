@@ -26,7 +26,7 @@ For more information about specific tweens and how to use it, [please refer to D
 
 *A video tutorial is also coming soon...*
 
-### Components available to Tween (TweenData)
+### Components available to tween (TweenData)
 * AudioMixer
 * AudioSource
 * Camera
@@ -44,7 +44,7 @@ For more information about specific tweens and how to use it, [please refer to D
 * Transform
 
 ## Special Thanks
-* [Demigiant](http://demigiant.com/) for creating DOTween and releasing a free version
+* [DEMIGIANT](http://demigiant.com/) for creating DOTween and releasing a free version
 * [Sirenix](http://sirenix.net) for their amazing support
 * [Paullo Cesar "PC"](https://github.com/paullocesarpc)
 * [Allan Oliveira](https://github.com/allanolivei)
