@@ -5,7 +5,6 @@ UniTween is a Tween framework that enables programmers and artists to create *al
 * **Zero-coding:** Make simple or complex tweens only by working on the Unity Edity.
 * **Productivity:** In our tests it is around 10 times faster to create a tween using UniTween than coding it.
 * **Reusability:** Tweens created with UniTween can be used multiple times in one or more sequences (ScriptableObject).
-* **Price:** Unlike DOTween Pro (paid license per seat), UniTween is free and can do much more without coding!
 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
