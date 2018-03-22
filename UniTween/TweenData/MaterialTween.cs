@@ -66,7 +66,7 @@ public class MaterialTween : TweenData
 
     private bool HideColor()
     {
-        return !command.ToString().Contains("Color");
+        return !command.ToString().Contains("Color") || command.ToString().Contains("Gradient");
     }
 
     private bool HideFloat()
