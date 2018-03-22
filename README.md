@@ -1,6 +1,10 @@
 # UniTween
 
-UniTween is a personal Tween framework for the games I make (mainly mobile games). It is based on DOTween and Odin.
+UniTween is a Tween framework that is based on DOTween and Odin. But why should you use it?
+
+* **Zero-coding:** Make simple or complex tweens only by working on the Unity Edity.
+* **Productivity:** In our tests it is around 10 times faster to create a tween using UniTween than coding it.
+* **Price:** Unlike DOTween Pro (paid license per seat), UniTween is free and can do much more without coding!
 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
