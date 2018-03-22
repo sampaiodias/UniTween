@@ -14,7 +14,7 @@ UniTween is a Tween framework for Unity that enables programmers and artists to 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
 * Import Odin - Inspector and Serializer to your project (version 1.0.6.1 or higher)
-* Download the latest .unitypackage file [from the Packages folder](https://github.com/sampaiodias/UniTween/tree/master/Unity%20Packages) and open it on your project.
+* Download the latest .unitypackage file [from the Releases folder](https://github.com/sampaiodias/UniTween/tree/master/Releases) and open it on your project.
 
 ## How To Use
 1. Right-click a folder in your project and create a TweenData with the type that corresponds to the component you want to tween.
