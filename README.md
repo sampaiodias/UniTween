@@ -1,10 +1,15 @@
 # UniTween
 
-UniTween is a Tween framework that enables programmers and artists to create *almost* any kind of Tween in a workflow that is easy to learn, fun to use, and with great maintainability.
+UniTween is a Tween framework for Unity that enables programmers and artists to create *almost* any kind of Tween in a workflow that is easy to learn, fun to use, and with great maintainability.
 
 * **Zero-coding:** Make simple or complex tweens only by working on the Unity Edity.
 * **Productivity:** In our tests it is around 10 times faster to create a tween using UniTween than coding it.
 * **Reusability:** Tweens created with UniTween can be used multiple times in one or more sequences (ScriptableObject).
+
+## Requirements
+* [Unity](https://unity3d.com/get-unity/download/archive) version 2017.1 or higher
+* [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
+* [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.1 or higher
 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
