@@ -22,6 +22,8 @@ UniTween is a Tween framework that enables programmers and artists to create *al
 8. To play the Sequence, call it using the Play() or Play(string id) methods. With an ID you don't need a direct reference to the object that contains the UniTween Sequence component (don't forget to set the ID on the UniTween Sequence component).
 9. OPTIONAL: You can set the other options such as loops and automatic play on the UniTween Sequence aswell.
 
+For more information about specific tweens and how to use it, [please refer to DOTween's official documentation](http://dotween.demigiant.com/documentation.php).
+
 *A video tutorial is also coming soon...*
 
 ### Components available to Tween (TweenData)
@@ -42,7 +44,8 @@ UniTween is a Tween framework that enables programmers and artists to create *al
 * Transform
 
 ## Special Thanks
-* [Sirenix](http://sirenix.net/odininspector/) for their amazing support for Odin
+* [Demigiant](http://demigiant.com/) for creating DOTween and releasing a free version
+* [Sirenix](http://sirenix.net) for their amazing support
 * [Paullo Cesar "PC"](https://github.com/paullocesarpc)
 * [Allan Oliveira](https://github.com/allanolivei)
 
