@@ -39,7 +39,7 @@ For more information about specific tweens and how to use them, [please refer to
 * Image
 * Light
 * LineRenderer
-* Material
+* MeshRenderer (Material)
 * Outline
 * RectTween
 * Rigidbody
