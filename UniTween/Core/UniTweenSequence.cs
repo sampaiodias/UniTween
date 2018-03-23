@@ -12,13 +12,16 @@ public class UniTweenSequence : SerializedMonoBehaviour {
     [InlineProperty]
     [LabelText("Sequence")]
     [PropertyOrder(10)]
+    [HideReferenceObjectPicker]
+    [OnValueChanged("CreateNewUniTween")]
     public List<UniTween> uniTweens = new List<UniTween>();
     [HideInInspector]
-    public Sequence sq;
+    private Sequence sq;
     [Space]
     public bool playOnStart;
     public bool playOnEnable;
     public bool killOnDisable;
+    [Tooltip("Set this to -1 for infinite loops.")]
     public int loops;
     [ShowIf("IsLoopSequence")]
     public LoopType loopType;
@@ -33,6 +36,15 @@ public class UniTweenSequence : SerializedMonoBehaviour {
         if (playOnStart)
         {
             Play();
+        }
+    }
+
+    private void CreateNewUniTween()
+    {
+        for (int i = 0; i < uniTweens.Count; i++)
+        {
+            if (uniTweens[i] == null)
+                uniTweens[i] = new UniTween();
         }
     }
 

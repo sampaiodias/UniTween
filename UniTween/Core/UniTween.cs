@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public struct UniTween {
+public class UniTween {
 
     [OnValueChanged("NewOperation")]
     public TweenOperation operation;
@@ -17,10 +17,13 @@ public struct UniTween {
     public float interval;
     [ShowIf("IsCallbackOperation")]
     [HideReferenceObjectPicker]
+    [Sirenix.Serialization.OdinSerialize]
     public UnityEvent unityEvent;
+    [Sirenix.Serialization.OdinSerialize]
     [HideReferenceObjectPicker]
     [ShowIf("ShowTarget")]
     [HideLabel]
+    [SerializeField]
     public UniTweenTarget target;
 
     private string tweenDataCurrentType;
