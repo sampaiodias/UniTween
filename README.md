@@ -6,6 +6,9 @@ UniTween is a Tween framework for Unity that enables programmers and artists to 
 * **Productivity:** In our tests it is around 10 times faster to create a tween using UniTween than coding it.
 * **Reusability:** Tweens created with UniTween can be used multiple times in one or more sequences (ScriptableObject).
 
+To see how it works, check the video demonstration clicking on the image below.
+[![VideoDemo](https://i.imgur.com/gCWT4WC.png)](https://www.youtube.com/watch?v=Sv7oJEfvsRg)
+
 ## Requirements
 * [Unity](https://unity3d.com/get-unity/download/archive) version 2017.1 or higher
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
@@ -27,7 +30,7 @@ UniTween is a Tween framework for Unity that enables programmers and artists to 
 8. To play the Sequence, call it using the Play() or Play(string id) methods. With an ID you don't need a direct reference to the object that contains the UniTween Sequence component (don't forget to set the ID on the UniTween Sequence component).
 9. OPTIONAL: You can set the other options such as loops and automatic play on the UniTween Sequence aswell.
 
-Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween. A video tutorial is also coming soon.
+Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween.
 
 For more information about specific tweens and how to use them, [please refer to DOTween's official documentation](http://dotween.demigiant.com/documentation.php).
 
