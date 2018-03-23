@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using System.Linq;
 
 [HideMonoScript]
 public class UniTweenSequence : SerializedMonoBehaviour {
@@ -29,7 +30,8 @@ public class UniTweenSequence : SerializedMonoBehaviour {
     [LabelText("ID")]
     public string id;
 
-    public static Dictionary<string, UniTweenSequence> sequences = new Dictionary<string, UniTweenSequence>();
+    private static List<UniTweenSequence> sequences = new List<UniTweenSequence>();
+    private static Lookup<string, UniTweenSequence> sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
 
     private void Start()
     {
@@ -122,7 +124,7 @@ public class UniTweenSequence : SerializedMonoBehaviour {
     private void OnEnable()
     {
         if (id != "")
-            sequences.Add(id, this);
+            sequences.Add(this);
 
         if (playOnEnable)
             Play();
@@ -131,7 +133,7 @@ public class UniTweenSequence : SerializedMonoBehaviour {
     private void OnDisable()
     {
         if (id != "")
-            sequences.Remove(id);
+            sequences.Remove(this);
 
         if (killOnDisable)
             Kill();
@@ -143,7 +145,12 @@ public class UniTweenSequence : SerializedMonoBehaviour {
     /// <param name="id"></param>
     public static void Play(string id)
     {
-        sequences[id].Play();
+        sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
+
+        foreach (var sequence in sequenceLookup[id])
+        {
+            sequence.Play();
+        }
     }
 
     /// <summary>
