@@ -3,7 +3,7 @@
 UniTween is a Tween framework for Unity that enables programmers and artists to create *almost* any kind of Tween in a workflow that is easy to learn, fun to use, and with great maintainability.
 
 * **Zero-coding:** Make simple or complex tweens only by working on the Unity Edity.
-* **Productivity:** In our tests it is around 10 times faster to create a tween using UniTween than coding it.
+* **Productivity:** In our tests it is up to 10 times faster to create a tween using UniTween than coding it.
 * **Reusability:** Tweens created with UniTween can be used multiple times in one or more sequences (ScriptableObject).
 
 To see how it works, check the video demonstration clicking on the image below.
@@ -54,6 +54,7 @@ For more information about specific tweens and how to use them, [please refer to
 ## Special Thanks
 * [DEMIGIANT](http://demigiant.com/) for creating DOTween and releasing a free version
 * [Sirenix](http://sirenix.net) for their amazing support
+* [LabTime](http://www.labtime.ufg.br/)
 * [Paullo Cesar "PC"](https://github.com/paullocesarpc)
 * [Allan Oliveira](https://github.com/allanolivei)
 
