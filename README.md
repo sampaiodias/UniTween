@@ -54,7 +54,7 @@ For more information about specific tweens and how to use them, [please refer to
 ## Special Thanks
 * [DEMIGIANT](http://demigiant.com/) for creating DOTween and releasing a free version
 * [Sirenix](http://sirenix.net) for their amazing support
-* [LabTime](http://www.labtime.ufg.br/)
+* [LabTIME](http://www.labtime.ufg.br/)
 * [Paullo Cesar "PC"](https://github.com/paullocesarpc)
 * [Allan Oliveira](https://github.com/allanolivei)
 
