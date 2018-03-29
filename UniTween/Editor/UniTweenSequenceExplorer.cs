@@ -41,6 +41,7 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
         }
 
         tree.SortMenuItemsByName();
+        //tree.MenuItems.AddIcons(EditorIcons.Play);
 
         return tree;
     }
@@ -76,7 +77,7 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
                 if (selected != null)
                 {
                     //GUILayout.Label(((GameEventListener)selected.ObjectInstance).name + " > " + selected.Name);
-                    GUILayout.Label(selected.Name);
+                    //GUILayout.Label(selected.Name);
 
                     if (SirenixEditorGUI.ToolbarButton(new GUIContent("Select GameObject")))
                     {
@@ -84,7 +85,7 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
                     }
                 }
 
-                if (SirenixEditorGUI.ToolbarButton(new GUIContent("Reload")))
+                if (SirenixEditorGUI.ToolbarButton(new GUIContent("Reload Tree")))
                 {
                     ForceMenuTreeRebuild();
                 }
@@ -93,7 +94,7 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
         }
         else
         {
-            if (SirenixEditorGUI.ToolbarButton(new GUIContent("Reload")))
+            if (SirenixEditorGUI.ToolbarButton(new GUIContent("Reload Tree")))
             {
                 ForceMenuTreeRebuild();
             }
@@ -104,8 +105,18 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
     private static void OpenWindow()
     {
         var window = GetWindow<UniTweenSequenceExplorer>();
-        window.titleContent.text = "Sequence Explorer";
+        window.titleContent.text = "Sequences";
         window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 500);
+    }
+
+    protected override void DrawEditor(int index)
+    {
+        UniTweenSequence obj = (UniTweenSequence)CurrentDrawingTargets[index];
+        SirenixEditorGUI.BeginBox(obj.gameObject.name + ": " + obj.id);
+        {
+            base.DrawEditor(index);
+        }
+        SirenixEditorGUI.EndBox();
     }
 }
 #endif
