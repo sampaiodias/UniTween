@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 [HideMonoScript]
-public class UniTweenSequence : SerializedMonoBehaviour {
-
+public class UniTweenSequence : SerializedMonoBehaviour
+{
     [Space(10)]
     [ListDrawerSettings(AlwaysAddDefaultValue = true)]
     [InlineProperty]
@@ -22,6 +21,7 @@ public class UniTweenSequence : SerializedMonoBehaviour {
     public bool playOnStart;
     public bool playOnEnable;
     public bool killOnDisable;
+    public float timeScale = 1;
     [Tooltip("Set this to -1 for infinite loops.")]
     public int loops;
     [ShowIf("IsLoopSequence")]
@@ -74,6 +74,7 @@ public class UniTweenSequence : SerializedMonoBehaviour {
             }
         }
         sq.SetLoops(loops, loopType);
+        sq.timeScale = timeScale;
     }
 
     public Tween GetTween(UniTween uniTween)

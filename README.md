@@ -39,16 +39,21 @@ For more information about specific tweens and how to use them, [please refer to
 * AudioSource
 * Camera
 * CanvasGroup
+* Graphic
 * Image
+* LayoutElement
 * Light
 * LineRenderer
 * MeshRenderer (Material)
 * Outline
 * RectTween
 * Rigidbody
-* Rigidbody 2D
+* Rigidbody2D
+* ScrollRect
+* Slider
 * SpriteRenderer
 * Text
+* TrailRenderer
 * Transform
 
 ## Special Thanks
@@ -57,6 +62,12 @@ For more information about specific tweens and how to use them, [please refer to
 * [LabTIME](http://www.labtime.ufg.br/)
 * [Paullo Cesar "PC"](https://github.com/paullocesarpc)
 * [Allan Oliveira](https://github.com/allanolivei)
+
+## Changelog
+
+### Version 1.0.1
+* Added new TweenData types: Graphic, LayoutElement, ScrollRect, Slider, TrailRenderer
+* Added TimeScale support for Sequences
 
 ## License
 

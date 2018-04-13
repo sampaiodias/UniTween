@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
-using Sirenix.OdinInspector;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.Audio;
 
-public class UniTween {
-
+public class UniTween
+{
     [OnValueChanged("NewOperation")]
     public TweenOperation operation;
     [ShowIf("IsTweenOperation")]
@@ -111,6 +109,26 @@ public class UniTween {
         else if (tweenData is LineRendererTween && !(target is UniTweenTarget<LineRendererTween>))
         {
             target = new UniTweenTarget<LineRenderer>();
+        }
+        else if (tweenData is TrailRendererTween && !(target is UniTweenTarget<TrailRendererTween>))
+        {
+            target = new UniTweenTarget<TrailRenderer>();
+        }
+        else if (tweenData is GraphicTween && !(target is UniTweenTarget<GraphicTween>))
+        {
+            target = new UniTweenTarget<Graphic>();
+        }
+        else if (tweenData is SliderTween && !(target is UniTweenTarget<SliderTween>))
+        {
+            target = new UniTweenTarget<Slider>();
+        }
+        else if (tweenData is ScrollRectTween && !(target is UniTweenTarget<ScrollRectTween>))
+        {
+            target = new UniTweenTarget<ScrollRect>();
+        }
+        else if (tweenData is LayoutElementTween && !(target is UniTweenTarget<LayoutElementTween>))
+        {
+            target = new UniTweenTarget<LayoutElement>();
         }
     }
 
