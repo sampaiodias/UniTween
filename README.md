@@ -29,6 +29,7 @@ To see how it works, check the video demonstration clicking on the image below.
 7. Go back to step 4 if you want to add more tweens to this Sequence.
 8. To play the Sequence, call it using the Play() or Play(string id) methods. With an ID you don't need a direct reference to the object that contains the UniTween Sequence component (don't forget to set the ID on the UniTween Sequence component).
 9. OPTIONAL: You can set the other options such as loops and automatic play on the UniTween Sequence aswell.
+10. OPTIONAL: You can also manage all Sequences in your scene using the Sequence Explorer (Tools/UniTween/Sequence Explorer)
 
 Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween.
 
