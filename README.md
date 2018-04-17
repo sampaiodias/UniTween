@@ -65,6 +65,12 @@ For more information about specific tweens and how to use them, [please refer to
 
 ## Changelog
 
+### Version 1.0.2
+* Added complete support for PlayBackwards, Rewind and Resume
+* Improved GUI for UniTween Sequence
+* Improved documentation for the public methods of UniTween Sequence
+* The GetTween(UniTween uniTween) method of UniTween Sequence is now private.
+
 ### Version 1.0.1
 * Added new TweenData types: Graphic, LayoutElement, ScrollRect, Slider, TrailRenderer
 * Added TimeScale support for Sequences
