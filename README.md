@@ -7,7 +7,7 @@ UniTween is a Tween framework for Unity that enables programmers and artists to 
 * **Reusability:** Tweens created with UniTween can be used multiple times in one or more sequences (ScriptableObject).
 
 To see how it works, check the video demonstration clicking on the image below.
-[![VideoDemo](https://i.imgur.com/gCWT4WC.png)](https://www.youtube.com/watch?v=Sv7oJEfvsRg)
+[![VideoDemo](https://i.imgur.com/o5mHYgK.png)](https://g.redditmedia.com/9AE7zanHgRsB0xVy-1Dnh-9ooWvVQpSXYLhBk0luxOk.gif?fm=mp4&mp4-fragmented=false&s=14bf19bb2ad19f0c9c380e0abc10aeac)
 
 ## Requirements
 * [Unity](https://unity3d.com/get-unity/download/archive) version 5.6.3 or higher (2017.1 or higher is recommended). Older versions may work but were not tested.
