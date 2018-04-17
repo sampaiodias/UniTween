@@ -23,7 +23,7 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
 
         for (int i = 0; i < evs.Count; i++)
         {
-            string sqName = evs[i].id != "" ?  evs[i].name + ": " + evs[i].id : evs[i].name;
+            string sqName = evs[i].id != "" ? evs[i].name + ": " + evs[i].id : evs[i].name;
 
             if (sqAmount.ContainsKey(sqName))
             {
@@ -98,7 +98,7 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
             {
                 ForceMenuTreeRebuild();
             }
-        }        
+        }
     }
 
     [MenuItem("Tools/UniTween/Sequence Explorer")]
@@ -112,11 +112,14 @@ public class UniTweenSequenceExplorer : OdinMenuEditorWindow
     protected override void DrawEditor(int index)
     {
         UniTweenSequence obj = (UniTweenSequence)CurrentDrawingTargets[index];
-        SirenixEditorGUI.BeginBox(obj.gameObject.name + ": " + obj.id);
+        if (obj != null)
         {
-            base.DrawEditor(index);
+            SirenixEditorGUI.BeginBox(obj.gameObject.name + ": " + obj.id);
+            {
+                base.DrawEditor(index);
+            }
+            SirenixEditorGUI.EndBox();
         }
-        SirenixEditorGUI.EndBox();
     }
 }
 #endif
