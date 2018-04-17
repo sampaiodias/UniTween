@@ -47,7 +47,7 @@ For more information about specific tweens and how to use them, [please refer to
 * LineRenderer
 * MeshRenderer (Material)
 * Outline
-* RectTween
+* RectTransform
 * Rigidbody
 * Rigidbody2D
 * ScrollRect
