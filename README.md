@@ -66,6 +66,9 @@ For more information about specific tweens and how to use them, [please refer to
 
 ## Changelog
 
+### Version 1.0.2.1
+* Fixed instability of Play and PlayBackwards when trying to play callbacks (UnityEvent)
+
 ### Version 1.0.2
 * Added complete support for PlayBackwards, Rewind and Resume
 * Improved GUI for UniTween Sequence

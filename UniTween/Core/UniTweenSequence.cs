@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 [HideMonoScript]
+[HelpURL("https://github.com/sampaiodias/UniTween")]
 public class UniTweenSequence : SerializedMonoBehaviour
 {
     [Space(10)]
@@ -83,21 +84,21 @@ public class UniTweenSequence : SerializedMonoBehaviour
     public void Play()
     {
         sq = DOTween.Sequence();
-        for (int i = 0; i < uniTweens.Count; i++)
+        foreach (var uniTween in uniTweens)
         {
-            switch (uniTweens[i].operation)
+            switch (uniTween.operation)
             {
                 case UniTween.TweenOperation.Append:
-                    sq.Append(GetTween(uniTweens[i]));
+                    sq.Append(GetTween(uniTween));
                     break;
                 case UniTween.TweenOperation.AppendInterval:
-                    sq.AppendInterval(uniTweens[i].interval);
+                    sq.AppendInterval(uniTween.interval);
                     break;
                 case UniTween.TweenOperation.AppendCallback:
-                    sq.AppendCallback(() => uniTweens[i].unityEvent.Invoke());
+                    sq.AppendCallback(() => uniTween.unityEvent.Invoke());
                     break;
                 case UniTween.TweenOperation.Join:
-                    sq.Join(GetTween(uniTweens[i]));
+                    sq.Join(GetTween(uniTween));
                     break;
             }
         }
@@ -118,21 +119,22 @@ public class UniTweenSequence : SerializedMonoBehaviour
     public void PlayBackwards()
     {
         sq = DOTween.Sequence();
-        for (int i = uniTweens.Count - 1; i >= 0; i--)
+        IEnumerable<UniTween> sequence = uniTweens;
+        foreach (var uniTween in sequence.Reverse())
         {
-            switch (uniTweens[i].operation)
+            switch (uniTween.operation)
             {
                 case UniTween.TweenOperation.Append:
-                    sq.Append(GetTween(uniTweens[i]));
+                    sq.Append(GetTween(uniTween));
                     break;
                 case UniTween.TweenOperation.AppendInterval:
-                    sq.AppendInterval(uniTweens[i].interval);
+                    sq.AppendInterval(uniTween.interval);
                     break;
                 case UniTween.TweenOperation.AppendCallback:
-                    sq.AppendCallback(() => uniTweens[i].unityEvent.Invoke());
+                    sq.AppendCallback(() => uniTween.unityEvent.Invoke());
                     break;
                 case UniTween.TweenOperation.Join:
-                    sq.Join(GetTween(uniTweens[i]));
+                    sq.Join(GetTween(uniTween));
                     break;
             }
         }
