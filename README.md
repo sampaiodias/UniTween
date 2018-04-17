@@ -28,7 +28,7 @@ To see how it works, check the video demonstration clicking on the image below.
 6. Drag the component/GameObject you want to manipulate
 7. Go back to step 4 if you want to add more tweens to this Sequence.
 8. To play the Sequence, change settings of the UniTween Sequence to play it on Start or Enable. Via script you can call it using the Play() or Play(string id) methods.
-9. OPTIONAL: You can set the other options such as loops and automatic play on the UniTween Sequence aswell.
+9. OPTIONAL: You can set the other options such as loops and time scale on the UniTween Sequence settings.
 10. OPTIONAL: You can also manage all Sequences in your scene using the Sequence Explorer (Tools/UniTween/Sequence Explorer)
 
 Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween.
