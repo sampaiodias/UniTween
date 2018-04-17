@@ -46,7 +46,6 @@ public class UniTweenSequence : SerializedMonoBehaviour
     [FoldoutGroup("Settings", true)]
     public bool killOnDisable;
 
-    private bool initialized = false;
     private static List<UniTweenSequence> sequences = new List<UniTweenSequence>();
     private static Lookup<string, UniTweenSequence> sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
 
@@ -74,26 +73,14 @@ public class UniTweenSequence : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// Plays the Sequence. If the Sequence was not initialized or was killed, 
-    /// automatically calls InitializeAndPlay().
+    /// Initializes and plays the Sequence.If you already called this once and didn't change 
+    /// the Sequence, consider using Play() or Resume() for a performance boost.
     /// </summary>
     [ShowIf("IsPlaying")]
     [ButtonGroup("Player")]
     [PropertyOrder(-1)]
     [Button(ButtonSizes.Medium)]
     public void Play()
-    {
-        if (!initialized)
-            InitializeAndPlay();
-        else
-            sq.Play();
-    }
-
-    /// <summary>
-    /// Initializes and plays the Sequence. If you already called this once and didn't change 
-    /// the Sequence, consider using Play() or Resume() for a performance boost.
-    /// </summary>
-    public void InitializeAndPlay()
     {
         sq = DOTween.Sequence();
         for (int i = 0; i < uniTweens.Count; i++)
@@ -116,7 +103,6 @@ public class UniTweenSequence : SerializedMonoBehaviour
         }
         sq.SetLoops(loops, loopType);
         sq.timeScale = timeScale;
-        initialized = true;
         sq.Play();
     }
 
@@ -152,13 +138,12 @@ public class UniTweenSequence : SerializedMonoBehaviour
         }
         sq.SetLoops(loops, loopType);
         sq.timeScale = timeScale;
-        initialized = true;
         sq.Play();
     }
 
     /// <summary>
     /// Resumes the playing Sequence, playing it where it was paused. 
-    /// Only works if itthe Sequence was initialized before (using Play() or PlayBackwards()).
+    /// Only works if the Sequence was initialized before (using Play() or PlayBackwards()).
     /// </summary>
     [ShowIf("IsPlaying")]
     [ButtonGroup("Player")]
@@ -203,7 +188,6 @@ public class UniTweenSequence : SerializedMonoBehaviour
     public void Kill()
     {
         sq.Kill();
-        initialized = false;
     }
 
     private void CreateNewUniTween()
