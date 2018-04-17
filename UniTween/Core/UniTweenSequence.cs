@@ -73,8 +73,8 @@ public class UniTweenSequence : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// Initializes and plays the Sequence.If you already called this once and didn't change 
-    /// the Sequence, consider using Play() or Resume() for a performance boost.
+    /// Initializes and plays the Sequence. If you already called this once and didn't change 
+    /// the Sequence, consider using Resume() for a performance boost.
     /// </summary>
     [ShowIf("IsPlaying")]
     [ButtonGroup("Player")]
