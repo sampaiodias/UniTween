@@ -92,7 +92,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
                     sq.Append(GetTween(uniTween));
                     break;
                 case UniTween.TweenOperation.AppendInterval:
-                    sq.AppendInterval(uniTween.interval);
+                    sq.AppendInterval(uniTween.GetInterval());
                     break;
                 case UniTween.TweenOperation.AppendCallback:
                     sq.AppendCallback(() => uniTween.unityEvent.Invoke());
@@ -128,7 +128,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
                     sq.Append(GetTween(uniTween));
                     break;
                 case UniTween.TweenOperation.AppendInterval:
-                    sq.AppendInterval(uniTween.interval);
+                    sq.AppendInterval(uniTween.GetInterval());
                     break;
                 case UniTween.TweenOperation.AppendCallback:
                     sq.AppendCallback(() => uniTween.unityEvent.Invoke());
