@@ -66,6 +66,11 @@ For more information about specific tweens and how to use them, [please refer to
 
 ## Changelog
 
+### Version 1.0.2.2
+* Added a Random Variance option for AppendInterval to create intervals with random amounts.
+* Added tooltips to help beginners understand the concepts of TweenData and Operations (Append, Join, etc.)
+* TweenData files and UniTween Sequence components now have a link to their appropriate documentation on the web (to see it click on the blue book on the upper right corner of the inspector) 
+
 ### Version 1.0.2.1
 * Fixed instability of Play and PlayBackwards when trying to play callbacks (UnityEvent)
 
