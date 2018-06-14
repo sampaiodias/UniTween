@@ -66,6 +66,9 @@ For more information about specific tweens and how to use them, [please refer to
 
 ## Changelog
 
+### Version 1.0.2.3
+* Added "Ignore Unity Time Scale" and "Update Time" options to UniTween Sequence
+
 ### Version 1.0.2.2
 * Added a Random Variance option for AppendInterval to create intervals with random amounts.
 * Added tooltips to help beginners understand the concepts of TweenData and Operations (Append, Join, etc.)
@@ -85,6 +88,8 @@ For more information about specific tweens and how to use them, [please refer to
 * Added TimeScale support for Sequences
 
 ## License
+
+**MIT License**
 
 Copyright 2018 Lucas Sampaio Dias
 
