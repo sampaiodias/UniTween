@@ -31,6 +31,12 @@ public class UniTweenSequence : SerializedMonoBehaviour
     public LoopType loopType;
     [FoldoutGroup("Settings", true)]
     public float timeScale = 1;
+    [FoldoutGroup("Settings", true)]
+    [Tooltip("If true, this Sequence will ignore the current Time Scale of the application (Time.timeScale).")]
+    public bool ignoreUnityTimeScale = false;
+    [FoldoutGroup("Settings", true)]
+    [Tooltip("DOTween's update type for THIS Sequence.\n\nNormal: updates on Update() calls.\nFixed: updates on FixedUpdate() calls.\nLate: updates on LateUpdate() calls.")]
+    public UpdateType updateTime = UpdateType.Normal;
     [Space]
     [FoldoutGroup("Settings", true)]
     public bool playOnStart;
@@ -84,6 +90,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
     public void Play()
     {
         sq = DOTween.Sequence();
+        sq.SetUpdate(updateTime, ignoreUnityTimeScale);
         foreach (var uniTween in uniTweens)
         {
             switch (uniTween.operation)
@@ -92,7 +99,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
                     sq.Append(GetTween(uniTween));
                     break;
                 case UniTween.TweenOperation.AppendInterval:
-                    sq.AppendInterval(uniTween.GetInterval());
+                    sq.AppendInterval(uniTween.interval);
                     break;
                 case UniTween.TweenOperation.AppendCallback:
                     sq.AppendCallback(() => uniTween.unityEvent.Invoke());
@@ -119,6 +126,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
     public void PlayBackwards()
     {
         sq = DOTween.Sequence();
+        sq.SetUpdate(updateTime, ignoreUnityTimeScale);
         IEnumerable<UniTween> sequence = uniTweens;
         foreach (var uniTween in sequence.Reverse())
         {
@@ -128,7 +136,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
                     sq.Append(GetTween(uniTween));
                     break;
                 case UniTween.TweenOperation.AppendInterval:
-                    sq.AppendInterval(uniTween.GetInterval());
+                    sq.AppendInterval(uniTween.interval);
                     break;
                 case UniTween.TweenOperation.AppendCallback:
                     sq.AppendCallback(() => uniTween.unityEvent.Invoke());
