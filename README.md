@@ -16,7 +16,7 @@ To see how it works, check the video demonstration clicking on the image below.
 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
-* Import Odin - Inspector and Serializer to your project (version 1.0.6.1 or higher)
+* Import Odin - Inspector and Serializer to your project (version 1.0.6.8 or higher)
 * Download the latest .unitypackage file [from the Releases folder](https://github.com/sampaiodias/UniTween/tree/master/Releases) and open it on your project.
 
 ## How To Use
