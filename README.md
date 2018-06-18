@@ -43,7 +43,7 @@ Extensions are extra functionality that are available by using other plugins ins
 Example:
 ![Extension Symbol Example](https://i.imgur.com/oLwPm3k.png "Extension Symbol Example")
 
-### Components available to tween (TweenData)
+## Components available to tween (TweenData)
 * AudioMixer
 * AudioSource
 * Camera
