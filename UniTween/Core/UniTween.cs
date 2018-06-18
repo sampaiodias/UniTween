@@ -141,6 +141,16 @@ public class UniTween
         {
             target = new UniTweenTarget<LayoutElement>();
         }
+#if UNITWEEN_TEXTMESH
+        else if (tweenData is TextMeshProUGUITween && !(target is UniTweenTarget<TextMeshProUGUITween>))
+        {
+            target = new UniTweenTarget<TMPro.TextMeshProUGUI>();
+        }
+        else if (tweenData is TextMeshProTween && !(target is UniTweenTarget<TextMeshProTween>))
+        {
+            target = new UniTweenTarget<TMPro.TextMeshPro>();
+        }
+#endif
     }
 
     private void SetCurrentType()
@@ -181,7 +191,7 @@ public class UniTween
         Join
     }
 
-    #region Wrapper
+#region Wrapper
     public abstract class UniTweenTarget
     {
     }
@@ -190,5 +200,5 @@ public class UniTween
     {
         public T component;
     }
-    #endregion
+#endregion
 }
