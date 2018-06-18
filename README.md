@@ -14,6 +14,8 @@ To see how it works, check the video demonstration clicking on the image below.
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
 * [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.1 or higher
 
+* Optional ([Extensions](#extensions)): TextMesh Pro
+
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
 * Import Odin - Inspector and Serializer to your project (version 1.0.6.1 or higher)
@@ -34,6 +36,13 @@ To see how it works, check the video demonstration clicking on the image below.
 Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween.
 
 For more information about specific tweens and how to use them, [please refer to DOTween's official documentation](http://dotween.demigiant.com/documentation.php).
+
+### Extensions
+Extensions are extra functionality that are available by using other plugins installed in your project. To use them, add the following "symbols" to the Scripting Define Symbols of your project (File/Build Settings/Player Settings.../Other Settings):
+* TextMesh Pro: UNITWEEN_TEXTMESH
+
+Example:
+![Extension Symbol Example](https://i.imgur.com/oLwPm3k.png "Extension Symbol Example")
 
 ### Components available to tween (TweenData)
 * AudioMixer
@@ -57,6 +66,9 @@ For more information about specific tweens and how to use them, [please refer to
 * TrailRenderer
 * Transform
 
+* TextMeshPro ([Extension](#extensions))
+* TextMeshProUGUI ([Extension](#extensions))
+
 ## Special Thanks
 * [DEMIGIANT](http://demigiant.com/) for creating DOTween and releasing a free version
 * [Sirenix](http://sirenix.net) for their amazing support
@@ -65,6 +77,9 @@ For more information about specific tweens and how to use them, [please refer to
 * [Allan Oliveira](https://github.com/allanolivei)
 
 ## Changelog
+
+### Version 1.0.3.0
+* Added support for TextMeshPro (works for DOTween free version)! To use it, check the [Extensions](#extensions) section.
 
 ### Version 1.0.2.3
 * Added "Ignore Unity Time Scale" and "Update Time" options to UniTween Sequence
