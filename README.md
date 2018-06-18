@@ -13,7 +13,6 @@ To see how it works, check the video demonstration clicking on the image below.
 * [Unity](https://unity3d.com/get-unity/download/archive) version 5.6.3 or higher (2017.1 or higher is recommended). Older versions may work but were not tested.
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
 * [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.1 or higher
-
 * Optional ([Extensions](#extensions)): TextMesh Pro
 
 ## How To Install
@@ -37,7 +36,7 @@ Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/
 
 For more information about specific tweens and how to use them, [please refer to DOTween's official documentation](http://dotween.demigiant.com/documentation.php).
 
-### Extensions
+## Extensions
 Extensions are extra functionality that are available by using other plugins installed in your project. To use them, add the following "symbols" to the Scripting Define Symbols of your project (File/Build Settings/Player Settings.../Other Settings):
 * TextMesh Pro: UNITWEEN_TEXTMESH
 
