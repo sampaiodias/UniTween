@@ -64,7 +64,6 @@ Example:
 * Text
 * TrailRenderer
 * Transform
-
 * TextMeshPro ([Extension](#extensions))
 * TextMeshProUGUI ([Extension](#extensions))
 
