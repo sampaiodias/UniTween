@@ -13,7 +13,7 @@ To see how it works, check the video demonstration clicking on the image below.
 * [Unity](https://unity3d.com/get-unity/download/archive) version 5.6.3 or higher (2017.1 or higher is recommended). Older versions may work but were not tested.
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
 * [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.1 or higher
-* Optional ([Extensions](#extensions)): TextMesh Pro
+* Optional ([Extensions](#extensions)): TextMesh Pro, Post-Processing Stack v2
 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
@@ -39,11 +39,12 @@ For more information about specific tweens and how to use them, [please refer to
 ## Extensions
 Extensions are extra functionality that are available by using other plugins installed in your project. To use them, add the following "symbols" to the Scripting Define Symbols of your project (File/Build Settings/Player Settings.../Other Settings):
 * TextMesh Pro: UNITWEEN_TEXTMESH
+* Post-Processing Stack v2: UNITY_POST_PROCESSING_STACK_V2 (Automatically added by the Stack)
 
 Example:
 ![Extension Symbol Example](https://i.imgur.com/oLwPm3k.png "Extension Symbol Example")
 
-## Components available to tween (TweenData)
+## Components available to tween
 * AudioMixer
 * AudioSource
 * Camera
@@ -64,6 +65,7 @@ Example:
 * Text
 * TrailRenderer
 * Transform
+* PostProcessVolume ([Extension](#extensions))
 * TextMeshPro ([Extension](#extensions))
 * TextMeshProUGUI ([Extension](#extensions))
 
@@ -76,8 +78,17 @@ Example:
 
 ## Changelog
 
+### Version 1.0.4.0
+* Added support for Post-Processing Stack v2! All Unity effects included in the Stack are available to tween!
+* Sequence Explorer now lists all objects with a UniTween Sequence, including inactive GameObjects.
+* The "Select GameObject" button of Sequence Explorer now pings the GameObject on the Hierarchy window.
+* Newly created TweenDatas now have a 1 second duration by default.
+* Newly created TweenDatas now have an InOut AnimationCurve by default (Custom Ease is still marked as false by default).
+* The TweenData folder is now divided in subfolders (separated by Extension).
+* Fixed component Type not changing properly when a new TweenData gets added into a UniTween Sequence element.
+
 ### Version 1.0.3.0
-* Added support for TextMeshPro (works for DOTween free version)! To use it, check the [Extensions](#extensions) section.
+* Added support for TextMesh Pro (works for DOTween free version)! To use it, check the [Extensions](#extensions) section.
 
 ### Version 1.0.2.3
 * Added "Ignore Unity Time Scale" and "Update Time" options to UniTween Sequence

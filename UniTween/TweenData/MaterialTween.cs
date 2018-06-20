@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tween Data/Material")]
+[CreateAssetMenu(menuName = "Tween Data/Mesh Renderer (Material)", fileName = "New MeshRenderer Tween")]
 public class MaterialTween : TweenData
 {
     [Space(15)]

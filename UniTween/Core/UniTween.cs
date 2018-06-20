@@ -59,6 +59,10 @@ public class UniTween
         }
     }
 
+    /// <summary>
+    /// Changes the Type of the tween's target. Don't worry about performance, this method
+    /// is only called inside the Editor.
+    /// </summary>
     private void SetNewTarget()
     {
         if (tweenData is RectTween && !(target is UniTweenTarget<RectTransform>))
@@ -97,58 +101,104 @@ public class UniTween
         {
             target = new UniTweenTarget<Light>();
         }
-        else if (tweenData is MaterialTween && !(target is UniTweenTarget<MaterialTween>))
+        else if (tweenData is MaterialTween && !(target is UniTweenTarget<Material>))
         {
             target = new UniTweenTarget<MeshRenderer>();
         }
-        else if (tweenData is AudioMixerTween && !(target is UniTweenTarget<AudioMixerTween>))
+        else if (tweenData is AudioMixerTween && !(target is UniTweenTarget<AudioMixer>))
         {
             target = new UniTweenTarget<AudioMixer>();
         }
-        else if (tweenData is AudioSourceTween && !(target is UniTweenTarget<AudioSourceTween>))
+        else if (tweenData is AudioSourceTween && !(target is UniTweenTarget<AudioSource>))
         {
             target = new UniTweenTarget<AudioSource>();
         }
-        else if (tweenData is CameraTween && !(target is UniTweenTarget<CameraTween>))
+        else if (tweenData is CameraTween && !(target is UniTweenTarget<Camera>))
         {
             target = new UniTweenTarget<Camera>();
         }
-        else if (tweenData is OutlineTween && !(target is UniTweenTarget<OutlineTween>))
+        else if (tweenData is OutlineTween && !(target is UniTweenTarget<Outline>))
         {
             target = new UniTweenTarget<Outline>();
         }
-        else if (tweenData is LineRendererTween && !(target is UniTweenTarget<LineRendererTween>))
+        else if (tweenData is LineRendererTween && !(target is UniTweenTarget<LineRenderer>))
         {
             target = new UniTweenTarget<LineRenderer>();
         }
-        else if (tweenData is TrailRendererTween && !(target is UniTweenTarget<TrailRendererTween>))
+        else if (tweenData is TrailRendererTween && !(target is UniTweenTarget<TrailRenderer>))
         {
             target = new UniTweenTarget<TrailRenderer>();
         }
-        else if (tweenData is GraphicTween && !(target is UniTweenTarget<GraphicTween>))
+        else if (tweenData is GraphicTween && !(target is UniTweenTarget<Graphic>))
         {
             target = new UniTweenTarget<Graphic>();
         }
-        else if (tweenData is SliderTween && !(target is UniTweenTarget<SliderTween>))
+        else if (tweenData is SliderTween && !(target is UniTweenTarget<Slider>))
         {
             target = new UniTweenTarget<Slider>();
         }
-        else if (tweenData is ScrollRectTween && !(target is UniTweenTarget<ScrollRectTween>))
+        else if (tweenData is ScrollRectTween && !(target is UniTweenTarget<ScrollRect>))
         {
             target = new UniTweenTarget<ScrollRect>();
         }
-        else if (tweenData is LayoutElementTween && !(target is UniTweenTarget<LayoutElementTween>))
+        else if (tweenData is LayoutElementTween && !(target is UniTweenTarget<LayoutElement>))
         {
             target = new UniTweenTarget<LayoutElement>();
         }
 #if UNITWEEN_TEXTMESH
-        else if (tweenData is TextMeshProUGUITween && !(target is UniTweenTarget<TextMeshProUGUITween>))
+        else if (tweenData is TextMeshProUGUITween && !(target is UniTweenTarget<TMPro.TextMeshProUGUI>))
         {
             target = new UniTweenTarget<TMPro.TextMeshProUGUI>();
         }
-        else if (tweenData is TextMeshProTween && !(target is UniTweenTarget<TextMeshProTween>))
+        else if (tweenData is TextMeshProTween && !(target is UniTweenTarget<TMPro.TextMeshPro>))
         {
             target = new UniTweenTarget<TMPro.TextMeshPro>();
+        }
+#endif
+#if UNITY_POST_PROCESSING_STACK_V2
+        else if (tweenData is PostProcessVolumeTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPVignetteTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPChromaticAberrationTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPBloomTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPGrainTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPDepthOfFieldTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPLensDistortionTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPMotionBlurTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPScreenSpaceReflectionsTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPAmbientOcclusionTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
+        }
+        else if (tweenData is PPColorGradingTween && !(target is UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>))
+        {
+            target = new UniTweenTarget<UnityEngine.Rendering.PostProcessing.PostProcessVolume>();
         }
 #endif
     }
@@ -191,7 +241,7 @@ public class UniTween
         Join
     }
 
-#region Wrapper
+    #region Wrapper
     public abstract class UniTweenTarget
     {
     }
@@ -200,5 +250,5 @@ public class UniTween
     {
         public T component;
     }
-#endregion
+    #endregion
 }

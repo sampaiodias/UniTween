@@ -1,18 +1,18 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TweenData : ScriptableObject {
+[HelpURL("http://dotween.demigiant.com/documentation.php#creatingTweener")]
+public class TweenData : ScriptableObject
+{
 
-    public float duration;
+    public float duration = 1;
     public float delay;
     public bool customEase;
     [HideIf("customEase")]
     public Ease ease;
     [ShowIf("customEase")]
-    public AnimationCurve curve;    
+    public AnimationCurve curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     public virtual Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
     {
