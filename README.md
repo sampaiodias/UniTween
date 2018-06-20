@@ -12,7 +12,7 @@ To see how it works, check the video demonstration clicking on the image below.
 ## Requirements
 * [Unity](https://unity3d.com/get-unity/download/archive) version 5.6.3 or higher (2017.1 or higher is recommended). Older versions may work but were not tested.
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
-* [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.1 or higher
+* [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.8 or higher
 * Optional ([Extensions](#extensions)): TextMesh Pro, Post-Processing Stack v2
 
 ## How To Install
