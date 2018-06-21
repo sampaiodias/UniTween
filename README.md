@@ -91,25 +91,25 @@ Example:
 * Added support for TextMesh Pro (works for DOTween free version)! To use it, check the [Extensions](#extensions) section.
 
 ### Version 1.0.2.3
-* Added "Ignore Unity Time Scale" and "Update Time" options to UniTween Sequence
+* Added "Ignore Unity Time Scale" and "Update Time" options to UniTween Sequence.
 
 ### Version 1.0.2.2
 * Added a Random Variance option for AppendInterval to create intervals with random amounts.
-* Added tooltips to help beginners understand the concepts of TweenData and Operations (Append, Join, etc.)
-* TweenData files and UniTween Sequence components now have a link to their appropriate documentation on the web (to see it click on the blue book on the upper right corner of the inspector) 
+* Added tooltips to help beginners understand the concepts of TweenData and Operations (Append, Join, etc.).
+* TweenData files and UniTween Sequence components now have a link to their appropriate documentation on the web (to see it click on the blue book on the upper right corner of the inspector).
 
 ### Version 1.0.2.1
-* Fixed instability of Play and PlayBackwards when trying to play callbacks (UnityEvent)
+* Fixed instability of Play and PlayBackwards when trying to play callbacks (UnityEvent).
 
 ### Version 1.0.2
-* Added complete support for PlayBackwards, Rewind and Resume
-* Improved GUI for UniTween Sequence
-* Improved documentation for the public methods of UniTween Sequence
+* Added complete support for PlayBackwards, Rewind and Resume.
+* Improved GUI for UniTween Sequence.
+* Improved documentation for the public methods of UniTween Sequence.
 * The GetTween(UniTween uniTween) method of UniTween Sequence is now private.
 
 ### Version 1.0.1
-* Added new TweenData types: Graphic, LayoutElement, ScrollRect, Slider, TrailRenderer
-* Added TimeScale support for Sequences
+* Added new TweenData types: Graphic, LayoutElement, ScrollRect, Slider, TrailRenderer.
+* Added TimeScale support for Sequences.
 
 ## License
 
