@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tween Data/Rect Transform")]
+[CreateAssetMenu(menuName = "Tween Data/Canvas/Rect Transform")]
 public class RectTween : TweenData {
 
     [Space(15)]
