@@ -20,30 +20,6 @@ To see how it works, check the video demonstration clicking on the image below.
 * Import Odin - Inspector and Serializer to your project (version 1.0.6.8 or higher)
 * Download the latest .unitypackage file [from the Releases folder](https://github.com/sampaiodias/UniTween/tree/master/Releases) and open it on your project.
 
-## How To Use
-1. Right-click a folder in your project and create a TweenData with the type that corresponds to the component you want to tween.
-2. Edit the TweenData file to change what will happen to the component
-3. Add a UniTween Sequence component to a GameObject
-4. Click on the '+' button and select the operation you want (Append, Join, AppendInterval or AppendCallback).
-5. Drag the TweenData you want to use
-6. Drag the component/GameObject you want to manipulate
-7. Go back to step 4 if you want to add more tweens to this Sequence.
-8. To play the Sequence, change settings of the UniTween Sequence to play it on Start or Enable. Via script you can call it using the Play() or Play(string id) methods.
-9. OPTIONAL: You can set the other options such as loops and time scale on the UniTween Sequence settings.
-10. OPTIONAL: You can also manage all Sequences in your scene using the Sequence Explorer (Tools/UniTween/Sequence Explorer)
-
-Check the [Examples folder](https://github.com/sampaiodias/UniTween/tree/master/Examples) to find more information about how to use UniTween.
-
-For more information about specific tweens and how to use them, [please refer to DOTween's official documentation](http://dotween.demigiant.com/documentation.php).
-
-## Extensions
-Extensions are extra functionality that are available by using other plugins installed in your project. To use them, add the following "symbols" to the Scripting Define Symbols of your project (File/Build Settings/Player Settings.../Other Settings):
-* TextMesh Pro: UNITWEEN_TEXTMESH
-* Post-Processing Stack v2: UNITY_POST_PROCESSING_STACK_V2 (Automatically added by the Stack)
-
-Example:
-![Extension Symbol Example](https://i.imgur.com/oLwPm3k.png "Extension Symbol Example")
-
 ## Components available to tween
 * AudioMixer
 * AudioSource
@@ -75,41 +51,6 @@ Example:
 * [LabTIME](http://www.labtime.ufg.br/)
 * [Paullo Cesar "PC"](https://github.com/paullocesarpc)
 * [Allan Oliveira](https://github.com/allanolivei)
-
-## Changelog
-
-### Version 1.0.4.0
-* Added support for Post-Processing Stack v2! All Unity effects included in the Stack are available to tween!
-* Sequence Explorer now lists all objects with a UniTween Sequence, including inactive GameObjects.
-* The "Select GameObject" button of Sequence Explorer now pings the GameObject on the Hierarchy window.
-* Newly created TweenDatas now have a 1 second duration by default.
-* Newly created TweenDatas now have an InOut AnimationCurve by default (Custom Ease is still marked as false by default).
-* The TweenData folder is now divided in subfolders (separated by Extension).
-* Fixed component Type not changing properly when a new TweenData gets added into a UniTween Sequence element.
-
-### Version 1.0.3.0
-* Added support for TextMesh Pro (works for DOTween free version)! To use it, check the [Extensions](#extensions) section.
-
-### Version 1.0.2.3
-* Added "Ignore Unity Time Scale" and "Update Time" options to UniTween Sequence.
-
-### Version 1.0.2.2
-* Added a Random Variance option for AppendInterval to create intervals with random amounts.
-* Added tooltips to help beginners understand the concepts of TweenData and Operations (Append, Join, etc.).
-* TweenData files and UniTween Sequence components now have a link to their appropriate documentation on the web (to see it click on the blue book on the upper right corner of the inspector).
-
-### Version 1.0.2.1
-* Fixed instability of Play and PlayBackwards when trying to play callbacks (UnityEvent).
-
-### Version 1.0.2
-* Added complete support for PlayBackwards, Rewind and Resume.
-* Improved GUI for UniTween Sequence.
-* Improved documentation for the public methods of UniTween Sequence.
-* The GetTween(UniTween uniTween) method of UniTween Sequence is now private.
-
-### Version 1.0.1
-* Added new TweenData types: Graphic, LayoutElement, ScrollRect, Slider, TrailRenderer.
-* Added TimeScale support for Sequences.
 
 ## License
 
