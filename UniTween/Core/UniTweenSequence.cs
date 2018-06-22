@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Sirenix.OdinInspector;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine;
 [HelpURL("https://github.com/sampaiodias/UniTween")]
 public class UniTweenSequence : SerializedMonoBehaviour
 {
+    #region Attributes
     [Space(10)]
     [ListDrawerSettings(AlwaysAddDefaultValue = true)]
     [InlineProperty]
@@ -55,18 +57,23 @@ public class UniTweenSequence : SerializedMonoBehaviour
 
     private static List<UniTweenSequence> sequences = new List<UniTweenSequence>();
     private static Lookup<string, UniTweenSequence> sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
+    #endregion
 
+    #region Tween
     /// <summary>
     /// Plays a UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
     /// </summary>
     /// <param name="id">The ID defined on the UniTween Sequence component</param>
     public static void Play(string id)
     {
-        sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
-
-        foreach (var sequence in sequenceLookup[id])
+        if (id != "")
         {
-            sequence.Play();
+            sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
+
+            foreach (var sequence in sequenceLookup[id])
+            {
+                sequence.Play();
+            }
         }
     }
 
@@ -199,7 +206,224 @@ public class UniTweenSequence : SerializedMonoBehaviour
     {
         sq.Kill();
     }
+    #endregion
 
+    #region TweenAll
+    /// <summary>
+    /// Plays all Sequences currently enabled.
+    /// </summary>
+    public void PlayAll()
+    {
+        foreach (var sq in sequences)
+        {
+            sq.Play();
+        }
+    }
+
+    /// <summary>
+    /// Initializes all Sequences backwards and plays them.
+    /// </summary>
+    public void PlayBackwardsAll()
+    {
+        foreach (var sq in sequences)
+        {
+            sq.PlayBackwards();
+        }
+    }
+
+    /// <summary>
+    /// Resumes all Sequences currently enabled.
+    /// Only works for Sequences that were initialized before (using Play or PlayBackwards).
+    /// </summary>
+    public void ResumeAll()
+    {
+        foreach (var sq in sequences)
+        {
+            sq.Resume();
+        }
+    }
+
+    /// <summary>
+    /// Pauses all Sequences currently enabled.
+    /// </summary>
+    public void PauseAll()
+    {
+        foreach (var sq in sequences)
+        {
+            sq.Pause();
+        }
+    }
+
+    /// <summary>
+    /// Rewinds all Sequences currently enabled.
+    /// </summary>
+    public void RewindAll()
+    {
+        foreach (var sq in sequences)
+        {
+            sq.Rewind();
+        }
+    }
+
+    /// <summary>
+    /// Kills all Sequences currently enabled.
+    /// </summary>
+    public void KillAll()
+    {
+        foreach (var sq in sequences)
+        {
+            sq.Kill();
+        }
+    }
+    #endregion
+
+    #region TweenDelayed
+    /// <summary>
+    /// Plays the Sequence after the specified time (in seconds).
+    /// </summary>
+    /// <param name="delay">Delay (in seconds) before the Sequence will be played.</param>
+    public void PlayDelayed(float delay)
+    {
+        StartCoroutine(PlayDelayed(this, new WaitForSeconds(delay)));
+    }
+
+    /// <summary>
+    /// Plays the Sequence after the specified time.
+    /// </summary>
+    /// <param name="delay">Delay before the Sequence will be played.</param>
+    public void PlayDelayed(WaitForSeconds delay)
+    {
+        StartCoroutine(PlayDelayed(this, delay));
+    }
+
+    private IEnumerator PlayDelayed(UniTweenSequence sequence, WaitForSeconds delay)
+    {
+        yield return delay;
+        sequence.Play();
+    }
+
+    /// <summary>
+    /// Plays the Sequence backwards after the specified time (in seconds).
+    /// </summary>
+    /// <param name="delay">Delay (in seconds) before the Sequence will be played.</param>
+    public void PlayBackwardsDelayed(float delay)
+    {
+        StartCoroutine(PlayBackwardsDelayed(this, new WaitForSeconds(delay)));
+    }
+
+    /// <summary>
+    /// Plays the Sequence backwards after the specified time.
+    /// </summary>
+    /// <param name="delay">Delay before the Sequence will be played.</param>
+    public void PlayBackwardsDelayed(WaitForSeconds delay)
+    {
+        StartCoroutine(PlayDelayed(this, delay));
+    }
+
+    private IEnumerator PlayBackwardsDelayed(UniTweenSequence sequence, WaitForSeconds delay)
+    {
+        yield return delay;
+        sequence.Play();
+    }
+
+    /// <summary>
+    /// Resumes the Sequence after the specified time (in seconds).
+    /// </summary>
+    /// <param name="delay">Delay (in seconds) before the Sequence will be resumed.</param>
+    public void ResumeDelayed(float delay)
+    {
+        StartCoroutine(ResumeDelayed(this, new WaitForSeconds(delay)));
+    }
+
+    /// <summary>
+    /// Resumes the Sequence after the specified time.
+    /// </summary>
+    /// <param name="delay">Delay before the Sequence will be resumed.</param>
+    public void ResumeDelayed(WaitForSeconds delay)
+    {
+        StartCoroutine(ResumeDelayed(this, delay));
+    }
+
+    private IEnumerator ResumeDelayed(UniTweenSequence sequence, WaitForSeconds delay)
+    {
+        yield return delay;
+        sequence.Resume();
+    }
+
+    /// <summary>
+    /// Pauses the Sequence after the specified time (in seconds).
+    /// </summary>
+    /// <param name="delay">Delay (in seconds) before the Sequence will be paused.</param>
+    public void PauseDelayed(float delay)
+    {
+        StartCoroutine(PauseDelayed(this, new WaitForSeconds(delay)));
+    }
+
+    /// <summary>
+    /// Pauses the Sequence after the specified time.
+    /// </summary>
+    /// <param name="delay">Delay before the Sequence will be paused.</param>
+    public void PauseDelayed(WaitForSeconds delay)
+    {
+        StartCoroutine(PauseDelayed(this, delay));
+    }
+
+    private IEnumerator PauseDelayed(UniTweenSequence sequence, WaitForSeconds delay)
+    {
+        yield return delay;
+        sequence.Pause();
+    }
+
+    /// <summary>
+    /// Rewinds the Sequence after the specified time (in seconds).
+    /// </summary>
+    /// <param name="delay">Delay (in seconds) before the Sequence will be rewinded.</param>
+    public void RewindDelayed(float delay)
+    {
+        StartCoroutine(RewindDelayed(this, new WaitForSeconds(delay)));
+    }
+
+    /// <summary>
+    /// Rewinds the Sequence after the specified time.
+    /// </summary>
+    /// <param name="delay">Delay before the Sequence will be rewinded.</param>
+    public void RewindDelayed(WaitForSeconds delay)
+    {
+        StartCoroutine(RewindDelayed(this, delay));
+    }
+
+    private IEnumerator RewindDelayed(UniTweenSequence sequence, WaitForSeconds delay)
+    {
+        yield return delay;
+        sequence.Rewind();
+    }
+
+    /// <summary>
+    /// Kills the Sequence after the specified time (in seconds).
+    /// </summary>
+    /// <param name="delay">Delay (in seconds) before the Sequence will be killed.</param>
+    public void KillDelayed(float delay)
+    {
+        StartCoroutine(KillDelayed(this, new WaitForSeconds(delay)));
+    }
+
+    /// <summary>
+    /// Kills the Sequence after the specified time.
+    /// </summary>
+    /// <param name="delay">Delay before the Sequence will be killed.</param>
+    public void KillDelayed(WaitForSeconds delay)
+    {
+        StartCoroutine(KillDelayed(this, delay));
+    }
+
+    private IEnumerator KillDelayed(UniTweenSequence sequence, WaitForSeconds delay)
+    {
+        yield return delay;
+        sequence.Kill();
+    }
+    #endregion
+
+    #region Private Methods
     private void CreateNewUniTween()
     {
         for (int i = 0; i < uniTweens.Count; i++)
@@ -241,8 +465,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
 
     private void OnEnable()
     {
-        if (id != "")
-            sequences.Add(this);
+        sequences.Add(this);
 
         if (playOnEnable)
             Play();
@@ -256,8 +479,7 @@ public class UniTweenSequence : SerializedMonoBehaviour
 
     private void OnDisable()
     {
-        if (id != "")
-            sequences.Remove(this);
+        sequences.Remove(this);
 
         if (rewindOnDisable)
             Rewind();
@@ -265,4 +487,5 @@ public class UniTweenSequence : SerializedMonoBehaviour
         if (killOnDisable)
             Kill();
     }
+    #endregion
 }
