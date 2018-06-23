@@ -2,10 +2,9 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-[HelpURL("http://dotween.demigiant.com/documentation.php#creatingTweener")]
+[HelpURL("https://github.com/sampaiodias/UniTween/wiki/TweenData-Documentation")]
 public class TweenData : ScriptableObject
 {
-
     public float duration = 1;
     public float delay;
     public bool customEase;

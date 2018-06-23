@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-[HelpURL("https://github.com/sampaiodias/UniTween")]
+[HelpURL("https://github.com/sampaiodias/UniTween/wiki/")]
 public class UniTween
 {
     [OnValueChanged("NewOperation")]
@@ -144,6 +144,10 @@ public class UniTween
         else if (tweenData is LayoutElementTween && !(target is UniTweenTarget<LayoutElement>))
         {
             target = new UniTweenTarget<LayoutElement>();
+        }
+        else if (tweenData is ParticleSystemTween && !(target is UniTweenTarget<ParticleSystem>))
+        {
+            target = new UniTweenTarget<ParticleSystem>();
         }
 #if UNITWEEN_TEXTMESH
         else if (tweenData is TextMeshProUGUITween && !(target is UniTweenTarget<TMPro.TextMeshProUGUI>))

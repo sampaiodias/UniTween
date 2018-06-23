@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 
 [HideMonoScript]
-[HelpURL("https://github.com/sampaiodias/UniTween")]
+[HelpURL("https://github.com/sampaiodias/UniTween/wiki")]
 public class UniTweenSequence : SerializedMonoBehaviour
 {
     #region Attributes
