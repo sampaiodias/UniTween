@@ -1,10 +1,30 @@
-# UniTween
+<br />
+<p align="center">
+    <img src="/Images/Logo.png" alt="UniTween">
+</p>
+<h3 align="center" style="text-align:center;">
+  Tweens with zero coding in a fast and maintainable workflow
+</h3>
+<p align="center">
+		UniTween is a powerful open-source tween framework for Unity built using DOTween and Odin Inspector
+</p>
 
-UniTween is a Tween framework for Unity that enables programmers and artists to create *almost* any kind of Tween in a workflow that is easy to learn, fun to use, and with great maintainability.
-
-* **Zero-coding:** Make simple or complex tweens only by working on the Unity Edity.
-* **Productivity:** In our tests it is up to 10 times faster to create a tween using UniTween than coding it.
-* **Reusability:** Tweens created with UniTween can be used multiple times in one or more sequences (ScriptableObject).
+</p>
+<hr>
+<p align="center">	
+	<a href="https://twitter.com/">
+		<img src="/Images/BtnTwitter.png" alt="Twitter">
+	</a>
+  <a href="https://github.com/sampaiodias/UniTween/wiki">
+		<img src="/Images/BtnWiki.png" alt="Wiki">
+	</a>	
+	<a href="https://github.com/sampaiodias/UniTween/tree/master/Releases">
+		<img src="/Images/BtnDownload.png" alt="Download">
+	</a>
+	<a href="https://www.google.com">
+		<img src="/Images/BtnDonate.png" alt="Donate">
+	</a>	
+</p>
 
 To see how it works, check the video demonstration clicking on the image below.
 [![VideoDemo](https://i.imgur.com/o5mHYgK.png)](https://g.redditmedia.com/9AE7zanHgRsB0xVy-1Dnh-9ooWvVQpSXYLhBk0luxOk.gif?fm=mp4&mp4-fragmented=false&s=14bf19bb2ad19f0c9c380e0abc10aeac)
