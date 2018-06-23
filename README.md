@@ -1,4 +1,3 @@
-<br />
 <p align="center">
     <img src="/Images/Logo.png" alt="UniTween">
 </p>
@@ -6,13 +5,13 @@
   Tweens with zero coding in a fast and maintainable workflow
 </h3>
 <p align="center">
-		UniTween is a powerful open-source tween framework for Unity built using DOTween and Odin Inspector
+		UniTween is a powerful open-source tween framework for Unity built using <a href="https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676">DOTween</a> and <a href="https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041">Odin Inspector</a>
 </p>
 
 </p>
 <hr>
 <p align="center">	
-	<a href="https://twitter.com/">
+	<a href="https://twitter.com/unitween_unity">
 		<img src="/Images/BtnTwitter.png" alt="Twitter">
 	</a>
   <a href="https://github.com/sampaiodias/UniTween/wiki">
@@ -21,7 +20,7 @@
 	<a href="https://github.com/sampaiodias/UniTween/tree/master/Releases">
 		<img src="/Images/BtnDownload.png" alt="Download">
 	</a>
-	<a href="https://www.google.com">
+	<a href="https://github.com/sampaiodias/UniTween/wiki/Donate">
 		<img src="/Images/BtnDonate.png" alt="Donate">
 	</a>	
 </p>
