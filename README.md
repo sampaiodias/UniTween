@@ -1,4 +1,3 @@
-<br />
 <p align="center">
     <img src="/Images/Logo.png" alt="UniTween">
 </p>
@@ -12,7 +11,7 @@
 </p>
 <hr>
 <p align="center">	
-	<a href="https://twitter.com/">
+	<a href="https://twitter.com/unitween_unity">
 		<img src="/Images/BtnTwitter.png" alt="Twitter">
 	</a>
   <a href="https://github.com/sampaiodias/UniTween/wiki">
@@ -21,7 +20,7 @@
 	<a href="https://github.com/sampaiodias/UniTween/tree/master/Releases">
 		<img src="/Images/BtnDownload.png" alt="Download">
 	</a>
-	<a href="https://www.google.com">
+	<a href="https://github.com/sampaiodias/UniTween/wiki/Donate">
 		<img src="/Images/BtnDonate.png" alt="Donate">
 	</a>	
 </p>
