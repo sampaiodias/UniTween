@@ -286,10 +286,12 @@ public class ParticleSystemTween : TweenData
                         sqColorTwoGradients.AppendCallback(() => main.startColor = new ParticleSystem.MinMaxGradient(gradientMin, gradientMax));
                         return sqColorTwoGradients;
                     case ParticleSystemGradientMode.RandomColor:
-                        var randomColorMode = main.startColor;
+                        ParticleSystem.MinMaxGradient grad = new ParticleSystem.MinMaxGradient(gradient)
+                        {
+                            mode = ParticleSystemGradientMode.RandomColor
+                        };
                         Sequence sqColorRandom = DOTween.Sequence();
-                        sqColorRandom.AppendCallback(() => randomColorMode.mode = ParticleSystemGradientMode.RandomColor);
-                        sqColorRandom.AppendCallback(() => main.startColor = new ParticleSystem.MinMaxGradient(gradient));
+                        sqColorRandom.AppendCallback(() => main.startColor = grad);
                         return sqColorRandom;
                 }
                 break;
