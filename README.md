@@ -49,8 +49,9 @@ To see how it works, check the video demonstration clicking on the image below.
 * LayoutElement
 * Light
 * LineRenderer
-* MeshRenderer (Material)
+* MeshRenderer
 * Outline
+* ParticleSystem (Experimental)
 * RectTransform
 * Rigidbody
 * Rigidbody2D
