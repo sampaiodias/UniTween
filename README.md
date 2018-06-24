@@ -32,7 +32,7 @@ To see how it works, check the video demonstration clicking on the image below.
 * [Unity](https://unity3d.com/get-unity/download/archive) version 5.6.3 or higher (2017.1 or higher is recommended). Older versions may work but were not tested.
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
 * [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 1.0.6.8 or higher
-* Optional ([Extensions](#extensions)): TextMesh Pro, Post-Processing Stack v2
+* Optional ([Extensions](https://github.com/sampaiodias/UniTween/wiki/Extensions)): TextMesh Pro, Post-Processing Stack v2
 
 ## How To Install
 * Import DOTween to your project (version 1.1.640 or higher)
@@ -60,9 +60,9 @@ To see how it works, check the video demonstration clicking on the image below.
 * Text
 * TrailRenderer
 * Transform
-* PostProcessVolume ([Extension](#extensions))
-* TextMeshPro ([Extension](#extensions))
-* TextMeshProUGUI ([Extension](#extensions))
+* PostProcessVolume ([Extension](https://github.com/sampaiodias/UniTween/wiki/Extensions))
+* TextMeshPro ([Extension](https://github.com/sampaiodias/UniTween/wiki/Extensions))
+* TextMeshProUGUI ([Extension](https://github.com/sampaiodias/UniTween/wiki/Extensions))
 
 ## Special Thanks
 * [DEMIGIANT](http://demigiant.com/) for creating DOTween and releasing a free version
