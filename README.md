@@ -25,7 +25,7 @@
 	</a>	
 </p>
 
-<img src="https://github.com/sampaiodias/UniTween/blob/wip/Images/0.5.0%20Demo.gif?raw=true" width="1024" height="600" />
+<img src="https://github.com/sampaiodias/UniTween/blob/wip/Images/0.5.0%20Demo.gif?raw=true" width="870" height="510" />
 
 To see how it works, check the video demonstration clicking on the image below.
 [![VideoDemo](https://i.imgur.com/o5mHYgK.png)](https://g.redditmedia.com/9AE7zanHgRsB0xVy-1Dnh-9ooWvVQpSXYLhBk0luxOk.gif?fm=mp4&mp4-fragmented=false&s=14bf19bb2ad19f0c9c380e0abc10aeac)
