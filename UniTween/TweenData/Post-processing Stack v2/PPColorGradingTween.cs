@@ -16,6 +16,11 @@ public class PPColorGradingTween : TweenData
     [HideIf("HideTo")]
     public float to;
     [ShowIf("ShowColor")]
+#if UNITY_2018_1_OR_NEWER
+    [ColorUsage(true, true)]
+#else
+    [ColorUsage(true, true, 0f, 8f, 0.125f, 3f)]
+#endif
     public Color color;
     [ShowIf("ShowVector")]
     public Vector4 vector;
