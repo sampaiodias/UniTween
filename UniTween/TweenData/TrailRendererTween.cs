@@ -1,42 +1,56 @@
-﻿using DG.Tweening;
-using Sirenix.OdinInspector;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Tween Data/Trail Renderer")]
-public class TrailRendererTween : TweenData
+﻿namespace UniTween.Data
 {
-    [Space(15)]
-    public TrailCommand command;
-    [ShowIf("IsResize")]
-    public float toStartWidth;
-    [ShowIf("IsResize")]
-    public float toEndWidth;
-    [HideIf("IsResize")]
-    public float to;
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
 
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Trail Renderer")]
+    public class TrailRendererTween : TweenData
     {
-        TrailRenderer trail = (TrailRenderer)GetComponent(uniTweenTarget);
+        [Space(15)]
+        public TrailCommand command;
+        [ShowIf("IsResize")]
+        public float toStartWidth;
+        [ShowIf("IsResize")]
+        public float toEndWidth;
+        [HideIf("IsResize")]
+        public float to;
 
-        switch (command)
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case TrailCommand.Resize:
-                return trail.DOResize(toStartWidth, toEndWidth, duration);
-            case TrailCommand.Time:
-                return trail.DOTime(to, duration);
-            default:
-                return null;
+            List<TrailRenderer> trails = (List<TrailRenderer>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            foreach (var t in trails)
+            {
+                tweens.Join(GetTween(t));
+            }
+            return tweens;
         }
-    }
 
-    private bool IsResize()
-    {
-        return command == TrailCommand.Resize;
-    }
+        public Tween GetTween(TrailRenderer trail)
+        {
+            switch (command)
+            {
+                case TrailCommand.Resize:
+                    return trail.DOResize(toStartWidth, toEndWidth, duration);
+                case TrailCommand.Time:
+                    return trail.DOTime(to, duration);
+                default:
+                    return null;
+            }
+        }
 
-    public enum TrailCommand
-    {
-        Resize,
-        Time
+        private bool IsResize()
+        {
+            return command == TrailCommand.Resize;
+        }
+
+        public enum TrailCommand
+        {
+            Resize,
+            Time
+        }
     }
 }

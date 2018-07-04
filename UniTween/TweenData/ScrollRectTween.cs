@@ -1,45 +1,59 @@
-﻿using DG.Tweening;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using UnityEngine.UI;
-
-[CreateAssetMenu(menuName = "Tween Data/Canvas/Scroll Rect")]
-public class ScrollRectTween : TweenData
+﻿namespace UniTween.Data
 {
-    [Space(15)]
-    public ScrollRectCommand command;
-    [ShowIf("ShowVector2")]
-    public Vector2 pos;
-    [HideIf("ShowVector2")]
-    public float to;
-    public bool snapping;
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Canvas/Scroll Rect")]
+    public class ScrollRectTween : TweenData
     {
-        ScrollRect scroll = (ScrollRect)GetComponent(uniTweenTarget);
+        [Space(15)]
+        public ScrollRectCommand command;
+        [ShowIf("ShowVector2")]
+        public Vector2 pos;
+        [HideIf("ShowVector2")]
+        public float to;
+        public bool snapping;
 
-        switch (command)
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case ScrollRectCommand.NormalizedPos:
-                return scroll.DONormalizedPos(pos, duration, snapping);
-            case ScrollRectCommand.HorizontalNormalizedPos:
-                return scroll.DOHorizontalNormalizedPos(to, duration, snapping);
-            case ScrollRectCommand.VerticalPos:
-                return scroll.DOVerticalNormalizedPos(to, duration, snapping);
-            default:
-                return null;
+            List<ScrollRect> scrolls = (List<ScrollRect>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            foreach (var t in scrolls)
+            {
+                tweens.Join(GetTween(t));
+            }
+            return tweens;
         }
-    }
 
-    private bool ShowVector2()
-    {
-        return command == ScrollRectCommand.NormalizedPos;
-    }
+        public Tween GetTween(ScrollRect scroll)
+        {
+            switch (command)
+            {
+                case ScrollRectCommand.NormalizedPos:
+                    return scroll.DONormalizedPos(pos, duration, snapping);
+                case ScrollRectCommand.HorizontalNormalizedPos:
+                    return scroll.DOHorizontalNormalizedPos(to, duration, snapping);
+                case ScrollRectCommand.VerticalPos:
+                    return scroll.DOVerticalNormalizedPos(to, duration, snapping);
+                default:
+                    return null;
+            }
+        }
 
-    public enum ScrollRectCommand
-    {
-        NormalizedPos,
-        HorizontalNormalizedPos,
-        VerticalPos
+        private bool ShowVector2()
+        {
+            return command == ScrollRectCommand.NormalizedPos;
+        }
+
+        public enum ScrollRectCommand
+        {
+            NormalizedPos,
+            HorizontalNormalizedPos,
+            VerticalPos
+        }
     }
 }

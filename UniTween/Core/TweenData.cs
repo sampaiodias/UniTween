@@ -1,25 +1,28 @@
-﻿using DG.Tweening;
-using Sirenix.OdinInspector;
-using UnityEngine;
-
-[HelpURL("https://github.com/sampaiodias/UniTween/wiki/TweenData-Documentation")]
-public class TweenData : ScriptableObject
+﻿namespace UniTween.Core
 {
-    public float duration = 1;
-    public float delay;
-    public bool customEase;
-    [HideIf("customEase")]
-    public Ease ease;
-    [ShowIf("customEase")]
-    public AnimationCurve curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using UnityEngine;
 
-    public virtual Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [HelpURL("https://github.com/sampaiodias/UniTween/wiki/TweenData-Documentation")]
+    public class TweenData : ScriptableObject
     {
-        return null;
-    }
+        public float duration = 1;
+        public float delay;
+        public bool customEase;
+        [HideIf("customEase")]
+        public Ease ease;
+        [ShowIf("customEase")]
+        public AnimationCurve curve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-    public object GetComponent(UniTween.UniTweenTarget uniTweenTarget)
-    {
-        return uniTweenTarget.GetType().GetField("component").GetValue(uniTweenTarget);
+        public virtual Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
+        {
+            return null;
+        }
+
+        public object GetComponent(UniTweenObject.UniTweenTarget uniTweenTarget)
+        {
+            return uniTweenTarget.GetType().GetField("components").GetValue(uniTweenTarget);
+        }
     }
 }

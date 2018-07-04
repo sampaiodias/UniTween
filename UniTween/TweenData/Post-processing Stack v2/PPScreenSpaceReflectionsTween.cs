@@ -1,53 +1,68 @@
 ﻿#if UNITY_POST_PROCESSING_STACK_V2
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-
-[CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Screen Space Reflections")]
-public class PPScreenSpaceReflectionsTween : TweenData
+namespace UniTween.Data
 {
-    [Space(15)]
-    [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
-    public bool automaticOverride = true;
-    [Space]
-    public ScreenSpaceReflectionsCommand command;
+    using DG.Tweening;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.Rendering.PostProcessing;
 
-    public float to;
-
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Screen Space Reflections")]
+    public class PPScreenSpaceReflectionsTween : TweenData
     {
-        PostProcessVolume volume = (PostProcessVolume)GetComponent(uniTweenTarget);
-        var setting = volume.profile.GetSetting<ScreenSpaceReflections>();
+        [Space(15)]
+        [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
+        public bool automaticOverride = true;
+        [Space]
+        public ScreenSpaceReflectionsCommand command;
 
-        if (setting != null)
+        public float to;
+
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            setting.active = automaticOverride;
-            switch (command)
+            List<PostProcessVolume> volumes = (List<PostProcessVolume>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            foreach (var t in volumes)
             {
-                case ScreenSpaceReflectionsCommand.MaximumMarchDistance:
-                    setting.maximumMarchDistance.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.maximumMarchDistance.value, x => setting.maximumMarchDistance.value = x, to, duration);
-                case ScreenSpaceReflectionsCommand.DistanceFade:
-                    setting.distanceFade.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.distanceFade.value, x => setting.distanceFade.value = x, to, duration);
-                case ScreenSpaceReflectionsCommand.Vignette:
-                    setting.vignette.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.vignette.value, x => setting.vignette.value = x, to, duration);
+                tweens.Join(GetTween(t));
             }
+            return tweens;
         }
-        else
+
+        public Tween GetTween(PostProcessVolume volume)
         {
-            Debug.Log("UniTween could not find a Screen Space Reflections to tween. Be sure to add it on your Post Process Volume component");
+            var setting = volume.profile.GetSetting<ScreenSpaceReflections>();
+
+            if (setting != null)
+            {
+                setting.active = automaticOverride;
+                switch (command)
+                {
+                    case ScreenSpaceReflectionsCommand.MaximumMarchDistance:
+                        setting.maximumMarchDistance.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.maximumMarchDistance.value, x => setting.maximumMarchDistance.value = x, to, duration);
+                    case ScreenSpaceReflectionsCommand.DistanceFade:
+                        setting.distanceFade.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.distanceFade.value, x => setting.distanceFade.value = x, to, duration);
+                    case ScreenSpaceReflectionsCommand.Vignette:
+                        setting.vignette.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.vignette.value, x => setting.vignette.value = x, to, duration);
+                }
+            }
+            else
+            {
+                Debug.Log("UniTween could not find a Screen Space Reflections to tween. Be sure to add it on your Post Process Volume component");
+            }
+
+            return null;
         }
 
-        return null;
-    }
-
-    public enum ScreenSpaceReflectionsCommand
-    {
-        MaximumMarchDistance,
-        DistanceFade,
-        Vignette,
+        public enum ScreenSpaceReflectionsCommand
+        {
+            MaximumMarchDistance,
+            DistanceFade,
+            Vignette,
+        }
     }
 }
 #endif

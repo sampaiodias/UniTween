@@ -1,53 +1,68 @@
 ﻿#if UNITY_POST_PROCESSING_STACK_V2
-using DG.Tweening;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-
-[CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Depth Of Field")]
-public class PPDepthOfFieldTween : TweenData
+namespace UniTween.Data
 {
-    [Space(15)]
-    [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
-    public bool automaticOverride = true;
-    [Space]
-    public DepthOfFieldCommand command;
+    using DG.Tweening;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.Rendering.PostProcessing;
 
-    public float to;
-
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Depth Of Field")]
+    public class PPDepthOfFieldTween : TweenData
     {
-        PostProcessVolume volume = (PostProcessVolume)GetComponent(uniTweenTarget);
-        var setting = volume.profile.GetSetting<DepthOfField>();
+        [Space(15)]
+        [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
+        public bool automaticOverride = true;
+        [Space]
+        public DepthOfFieldCommand command;
 
-        if (setting != null)
+        public float to;
+
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            setting.active = automaticOverride;
-            switch (command)
+            List<PostProcessVolume> volumes = (List<PostProcessVolume>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            foreach (var t in volumes)
             {
-                case DepthOfFieldCommand.FocusDistance:
-                    setting.focusDistance.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.focusDistance.value, x => setting.focusDistance.value = x, to, duration);
-                case DepthOfFieldCommand.Aperture:
-                    setting.aperture.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.aperture.value, x => setting.aperture.value = x, to, duration);
-                case DepthOfFieldCommand.FocalLength:
-                    setting.focalLength.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.focalLength.value, x => setting.focalLength.value = x, to, duration);
+                tweens.Join(GetTween(t));
             }
+            return tweens;
         }
-        else
+
+        public Tween GetTween(PostProcessVolume volume)
         {
-            Debug.Log("UniTween could not find a Depth Of Field to tween. Be sure to add it on your Post Process Volume component");
+            var setting = volume.profile.GetSetting<DepthOfField>();
+
+            if (setting != null)
+            {
+                setting.active = automaticOverride;
+                switch (command)
+                {
+                    case DepthOfFieldCommand.FocusDistance:
+                        setting.focusDistance.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.focusDistance.value, x => setting.focusDistance.value = x, to, duration);
+                    case DepthOfFieldCommand.Aperture:
+                        setting.aperture.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.aperture.value, x => setting.aperture.value = x, to, duration);
+                    case DepthOfFieldCommand.FocalLength:
+                        setting.focalLength.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.focalLength.value, x => setting.focalLength.value = x, to, duration);
+                }
+            }
+            else
+            {
+                Debug.Log("UniTween could not find a Depth Of Field to tween. Be sure to add it on your Post Process Volume component");
+            }
+
+            return null;
         }
 
-        return null;
-    }
-
-    public enum DepthOfFieldCommand
-    {
-        FocusDistance,
-        Aperture,
-        FocalLength,
+        public enum DepthOfFieldCommand
+        {
+            FocusDistance,
+            Aperture,
+            FocalLength,
+        }
     }
 }
 #endif

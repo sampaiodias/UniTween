@@ -1,42 +1,56 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
-using DG.Tweening;
-using UnityEngine.UI;
-
-[CreateAssetMenu(menuName = "Tween Data/Canvas/Outline")]
-public class OutlineTween : TweenData
+﻿namespace UniTween.Data
 {
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    public OutlineCommand command;
-
-    [HideIf("HideColor")]
-    public Color color;
-    [ShowIf("HideColor")]
-    public float to;
-
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Canvas/Outline")]
+    public class OutlineTween : TweenData
     {
-        Outline outline = (Outline)GetComponent(uniTweenTarget);
 
-        switch (command)
+        public OutlineCommand command;
+
+        [HideIf("HideColor")]
+        public Color color;
+        [ShowIf("HideColor")]
+        public float to;
+
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case OutlineCommand.Color:
-                return outline.DOColor(color, duration);
-            case OutlineCommand.Fade:
-                return outline.DOFade(to, duration);
-            default:
-                return null;
+            List<Outline> outlines = (List<Outline>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            foreach (var t in outlines)
+            {
+                tweens.Join(GetTween(t));
+            }
+            return tweens;
         }
-    }
 
-    private bool HideColor()
-    {
-        return command != OutlineCommand.Color;
-    }
+        public Tween GetTween(Outline outline)
+        {
+            switch (command)
+            {
+                case OutlineCommand.Color:
+                    return outline.DOColor(color, duration);
+                case OutlineCommand.Fade:
+                    return outline.DOFade(to, duration);
+                default:
+                    return null;
+            }
+        }
 
-    public enum OutlineCommand
-    {
-        Color,
-        Fade
+        private bool HideColor()
+        {
+            return command != OutlineCommand.Color;
+        }
+
+        public enum OutlineCommand
+        {
+            Color,
+            Fade
+        }
     }
 }

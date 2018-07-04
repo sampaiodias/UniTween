@@ -1,36 +1,50 @@
-﻿using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
-
-[CreateAssetMenu(menuName = "Tween Data/Canvas/Layout Element")]
-public class LayoutElementTween : TweenData
+﻿namespace UniTween.Data
 {
-    [Space(15)]
-    public LayoutElementCommand command;
-    public Vector2 to;
-    public bool snapping;
+    using DG.Tweening;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Canvas/Layout Element")]
+    public class LayoutElementTween : TweenData
     {
-        LayoutElement element = (LayoutElement)GetComponent(uniTweenTarget);
+        [Space(15)]
+        public LayoutElementCommand command;
+        public Vector2 to;
+        public bool snapping;
 
-        switch (command)
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case LayoutElementCommand.FlexibleSize:
-                return element.DOFlexibleSize(to, duration, snapping);
-            case LayoutElementCommand.MinSize:
-                return element.DOMinSize(to, duration, snapping);
-            case LayoutElementCommand.PreferredSize:
-                return element.DOPreferredSize(to, duration, snapping);
-            default:
-                return null;
+            List<LayoutElement> elements = (List<LayoutElement>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            foreach (var t in elements)
+            {
+                tweens.Join(GetTween(t));
+            }
+            return tweens;
         }
-    }
 
-    public enum LayoutElementCommand
-    {
-        FlexibleSize,
-        MinSize,
-        PreferredSize
+        public Tween GetTween(LayoutElement element)
+        {
+            switch (command)
+            {
+                case LayoutElementCommand.FlexibleSize:
+                    return element.DOFlexibleSize(to, duration, snapping);
+                case LayoutElementCommand.MinSize:
+                    return element.DOMinSize(to, duration, snapping);
+                case LayoutElementCommand.PreferredSize:
+                    return element.DOPreferredSize(to, duration, snapping);
+                default:
+                    return null;
+            }
+        }
+
+        public enum LayoutElementCommand
+        {
+            FlexibleSize,
+            MinSize,
+            PreferredSize
+        }
     }
 }
