@@ -20,6 +20,12 @@
         [HideIf("HideSnapping")]
         public bool snapping = false;
 
+        /// <summary>
+        /// Creates and returns a Tween for all components contained inside the UniTweenTarget.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
+        /// <returns></returns>
         public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
             List<RectTransform> rects = (List<RectTransform>)GetComponent(uniTweenTarget);
@@ -31,6 +37,12 @@
             return tweens;
         }
 
+        /// <summary>
+        /// Creates and returns a Tween for the informed component.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
         public Tween GetTween(RectTransform rect)
         {
             switch (command)
