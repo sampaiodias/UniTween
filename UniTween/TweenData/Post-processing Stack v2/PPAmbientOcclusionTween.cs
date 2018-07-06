@@ -1,62 +1,99 @@
 ﻿#if UNITY_POST_PROCESSING_STACK_V2
-using DG.Tweening;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-
-[CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Ambient Occlusion")]
-public class PPAmbientOcclusionTween : TweenData
+namespace UniTween.Data
 {
-    [Space(15)]
-    [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
-    public bool automaticOverride = true;
-    [Space]
-    public AmbientOcclusionCommand command;
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.Rendering.PostProcessing;
 
-    [HideIf("ShowColor")]
-    public float to;
-    [ShowIf("ShowColor")]
-    public Color color;
-
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Ambient Occlusion")]
+    public class PPAmbientOcclusionTween : TweenData
     {
-        PostProcessVolume volume = (PostProcessVolume)GetComponent(uniTweenTarget);
-        var setting = volume.profile.GetSetting<AmbientOcclusion>();
+        [Space(15)]
+        [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
+        public bool automaticOverride = true;
+        [Space]
+        public AmbientOcclusionCommand command;
 
-        if (setting != null)
+        [HideIf("ShowColor")]
+        public float to;
+        [ShowIf("ShowColor")]
+        public Color color;
+
+        /// <summary>
+        /// Creates and returns a Tween for all components contained inside the UniTweenTarget.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
+        /// <returns></returns>
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            setting.active = automaticOverride;
-            switch (command)
+            List<PostProcessVolume> volumes = (List<PostProcessVolume>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            if (customEase)
             {
-                case AmbientOcclusionCommand.Intensity:
-                    setting.intensity.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.intensity.value, x => setting.intensity.value = x, to, duration);
-                case AmbientOcclusionCommand.Radius:
-                    setting.radius.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.radius.value, x => setting.radius.value = x, to, duration);
-                case AmbientOcclusionCommand.Color:
-                    setting.color.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.color.value, x => setting.color.value = x, color, duration);
+                foreach (var t in volumes)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
             }
+            else
+            {
+                foreach (var t in volumes)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
+            }
+            return tweens;
         }
-        else
+
+        /// <summary>
+        /// Creates and returns a Tween for the informed component.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public Tween GetTween(PostProcessVolume volume)
         {
-            Debug.Log("UniTween could not find an Ambient Occlusion to tween. Be sure to add it on your Post Process Volume component");
+            var setting = volume.profile.GetSetting<AmbientOcclusion>();
+
+            if (setting != null)
+            {
+                setting.active = automaticOverride;
+                switch (command)
+                {
+                    case AmbientOcclusionCommand.Intensity:
+                        setting.intensity.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.intensity.value, x => setting.intensity.value = x, to, duration);
+                    case AmbientOcclusionCommand.Radius:
+                        setting.radius.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.radius.value, x => setting.radius.value = x, to, duration);
+                    case AmbientOcclusionCommand.Color:
+                        setting.color.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.color.value, x => setting.color.value = x, color, duration);
+                }
+            }
+            else
+            {
+                Debug.Log("UniTween could not find an Ambient Occlusion to tween. Be sure to add it on your Post Process Volume component");
+            }
+
+            return null;
         }
 
-        return null;
-    }
+        private bool ShowColor()
+        {
+            return command == AmbientOcclusionCommand.Color;
+        }
 
-    private bool ShowColor()
-    {
-        return command == AmbientOcclusionCommand.Color;
-    }
-
-    public enum AmbientOcclusionCommand
-    {
-        Intensity,
-        Radius,
-        Color,
+        public enum AmbientOcclusionCommand
+        {
+            Intensity,
+            Radius,
+            Color,
+        }
     }
 }
 #endif

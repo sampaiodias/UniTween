@@ -1,141 +1,178 @@
 ﻿#if UNITY_POST_PROCESSING_STACK_V2
-using DG.Tweening;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-
-[CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Color Grading")]
-public class PPColorGradingTween : TweenData
+namespace UniTween.Data
 {
-    [Space(15)]
-    [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
-    public bool automaticOverride = true;
-    [Space]
-    public ColorGradingCommand command;
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.Rendering.PostProcessing;
 
-    [HideIf("HideTo")]
-    public float to;
-    [ShowIf("ShowColor")]
+    [CreateAssetMenu(menuName = "Tween Data/Post-processing Stack v2/Color Grading")]
+    public class PPColorGradingTween : TweenData
+    {
+        [Space(15)]
+        [Tooltip("If true, the post-processing effect you want to tween will be automatically activated.")]
+        public bool automaticOverride = true;
+        [Space]
+        public ColorGradingCommand command;
+
+        [HideIf("HideTo")]
+        public float to;
+        [ShowIf("ShowColor")]
 #if UNITY_2018_1_OR_NEWER
-    [ColorUsage(true, true)]
+        [ColorUsage(true, true)]
 #else
     [ColorUsage(true, true, 0f, 8f, 0.125f, 3f)]
 #endif
-    public Color color;
-    [ShowIf("ShowVector")]
-    public Vector4 vector;
+        public Color color;
+        [ShowIf("ShowVector")]
+        public Vector4 vector;
 
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
-    {
-        PostProcessVolume volume = (PostProcessVolume)GetComponent(uniTweenTarget);
-        var setting = volume.profile.GetSetting<ColorGrading>();
-
-        if (setting != null)
+        /// <summary>
+        /// Creates and returns a Tween for all components contained inside the UniTweenTarget.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
+        /// <returns></returns>
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            setting.active = automaticOverride;
-            switch (command)
+            List<PostProcessVolume> volumes = (List<PostProcessVolume>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            if (customEase)
             {
-                case ColorGradingCommand.Temperature:
-                    setting.temperature.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.temperature.value, x => setting.temperature.value = x, to, duration);
-                case ColorGradingCommand.Tint:
-                    setting.tint.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.tint.value, x => setting.tint.value = x, to, duration);
-                case ColorGradingCommand.PostExposure:
-                    setting.postExposure.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.postExposure.value, x => setting.postExposure.value = x, to, duration);
-                case ColorGradingCommand.ColorFilter:
-                    setting.colorFilter.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.colorFilter.value, x => setting.colorFilter.value = x, color, duration);
-                case ColorGradingCommand.Saturation:
-                    setting.saturation.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.saturation.value, x => setting.saturation.value = x, to, duration);
-                case ColorGradingCommand.Contrast:
-                    setting.contrast.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.contrast.value, x => setting.contrast.value = x, to, duration);
-                case ColorGradingCommand.RedMixerRed:
-                    setting.mixerRedOutRedIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerRedOutRedIn.value, x => setting.mixerRedOutRedIn.value = x, to, duration);
-                case ColorGradingCommand.RedMixerGreen:
-                    setting.mixerRedOutGreenIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerRedOutGreenIn.value, x => setting.mixerRedOutGreenIn.value = x, to, duration);
-                case ColorGradingCommand.RedMixerBlue:
-                    setting.mixerRedOutBlueIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerRedOutBlueIn.value, x => setting.mixerRedOutBlueIn.value = x, to, duration);
-                case ColorGradingCommand.GreenMixerRed:
-                    setting.mixerGreenOutRedIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerGreenOutRedIn.value, x => setting.mixerGreenOutRedIn.value = x, to, duration);
-                case ColorGradingCommand.GreenMixerGreen:
-                    setting.mixerGreenOutGreenIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerGreenOutGreenIn.value, x => setting.mixerGreenOutGreenIn.value = x, to, duration);
-                case ColorGradingCommand.GreenMixerBlue:
-                    setting.mixerGreenOutBlueIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerGreenOutBlueIn.value, x => setting.mixerGreenOutBlueIn.value = x, to, duration);
-                case ColorGradingCommand.BlueMixerRed:
-                    setting.mixerBlueOutRedIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerBlueOutRedIn.value, x => setting.mixerBlueOutRedIn.value = x, to, duration);
-                case ColorGradingCommand.BlueMixerGreen:
-                    setting.mixerBlueOutGreenIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerBlueOutGreenIn.value, x => setting.mixerBlueOutGreenIn.value = x, to, duration);
-                case ColorGradingCommand.BlueMixerBlue:
-                    setting.mixerBlueOutBlueIn.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.mixerBlueOutBlueIn.value, x => setting.mixerBlueOutBlueIn.value = x, to, duration);
-                case ColorGradingCommand.Lift:
-                    setting.lift.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.lift.value, x => setting.lift.value = x, vector, duration);
-                case ColorGradingCommand.Gamma:
-                    setting.gamma.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.gamma.value, x => setting.gamma.value = x, vector, duration);
-                case ColorGradingCommand.Gain:
-                    setting.gamma.overrideState = automaticOverride;
-                    return DOTween.To(() => setting.gamma.value, x => setting.gamma.value = x, vector, duration);
+                foreach (var t in volumes)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
             }
+            else
+            {
+                foreach (var t in volumes)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
+            }
+            return tweens;
         }
-        else
+
+        /// <summary>
+        /// Creates and returns a Tween for the informed component.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public Tween GetTween(PostProcessVolume volume)
         {
-            Debug.Log("UniTween could not find a Color Grading to tween. Be sure to add it on your Post Process Volume component");
+            var setting = volume.profile.GetSetting<ColorGrading>();
+
+            if (setting != null)
+            {
+                setting.active = automaticOverride;
+                switch (command)
+                {
+                    case ColorGradingCommand.Temperature:
+                        setting.temperature.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.temperature.value, x => setting.temperature.value = x, to, duration);
+                    case ColorGradingCommand.Tint:
+                        setting.tint.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.tint.value, x => setting.tint.value = x, to, duration);
+                    case ColorGradingCommand.PostExposure:
+                        setting.postExposure.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.postExposure.value, x => setting.postExposure.value = x, to, duration);
+                    case ColorGradingCommand.ColorFilter:
+                        setting.colorFilter.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.colorFilter.value, x => setting.colorFilter.value = x, color, duration);
+                    case ColorGradingCommand.Saturation:
+                        setting.saturation.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.saturation.value, x => setting.saturation.value = x, to, duration);
+                    case ColorGradingCommand.Contrast:
+                        setting.contrast.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.contrast.value, x => setting.contrast.value = x, to, duration);
+                    case ColorGradingCommand.RedMixerRed:
+                        setting.mixerRedOutRedIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerRedOutRedIn.value, x => setting.mixerRedOutRedIn.value = x, to, duration);
+                    case ColorGradingCommand.RedMixerGreen:
+                        setting.mixerRedOutGreenIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerRedOutGreenIn.value, x => setting.mixerRedOutGreenIn.value = x, to, duration);
+                    case ColorGradingCommand.RedMixerBlue:
+                        setting.mixerRedOutBlueIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerRedOutBlueIn.value, x => setting.mixerRedOutBlueIn.value = x, to, duration);
+                    case ColorGradingCommand.GreenMixerRed:
+                        setting.mixerGreenOutRedIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerGreenOutRedIn.value, x => setting.mixerGreenOutRedIn.value = x, to, duration);
+                    case ColorGradingCommand.GreenMixerGreen:
+                        setting.mixerGreenOutGreenIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerGreenOutGreenIn.value, x => setting.mixerGreenOutGreenIn.value = x, to, duration);
+                    case ColorGradingCommand.GreenMixerBlue:
+                        setting.mixerGreenOutBlueIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerGreenOutBlueIn.value, x => setting.mixerGreenOutBlueIn.value = x, to, duration);
+                    case ColorGradingCommand.BlueMixerRed:
+                        setting.mixerBlueOutRedIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerBlueOutRedIn.value, x => setting.mixerBlueOutRedIn.value = x, to, duration);
+                    case ColorGradingCommand.BlueMixerGreen:
+                        setting.mixerBlueOutGreenIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerBlueOutGreenIn.value, x => setting.mixerBlueOutGreenIn.value = x, to, duration);
+                    case ColorGradingCommand.BlueMixerBlue:
+                        setting.mixerBlueOutBlueIn.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.mixerBlueOutBlueIn.value, x => setting.mixerBlueOutBlueIn.value = x, to, duration);
+                    case ColorGradingCommand.Lift:
+                        setting.lift.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.lift.value, x => setting.lift.value = x, vector, duration);
+                    case ColorGradingCommand.Gamma:
+                        setting.gamma.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.gamma.value, x => setting.gamma.value = x, vector, duration);
+                    case ColorGradingCommand.Gain:
+                        setting.gamma.overrideState = automaticOverride;
+                        return DOTween.To(() => setting.gamma.value, x => setting.gamma.value = x, vector, duration);
+                }
+            }
+            else
+            {
+                Debug.Log("UniTween could not find a Color Grading to tween. Be sure to add it on your Post Process Volume component");
+            }
+
+            return null;
         }
 
-        return null;
-    }
+        private bool HideTo()
+        {
+            return ShowColor() || ShowVector();
+        }
 
-    private bool HideTo()
-    {
-        return ShowColor() || ShowVector();
-    }
+        private bool ShowColor()
+        {
+            return command == ColorGradingCommand.ColorFilter;
+        }
 
-    private bool ShowColor()
-    {
-        return command == ColorGradingCommand.ColorFilter;
-    }
+        private bool ShowVector()
+        {
+            return command == ColorGradingCommand.Lift
+                || command == ColorGradingCommand.Gain
+                || command == ColorGradingCommand.Gamma;
+        }
 
-    private bool ShowVector()
-    {
-        return command == ColorGradingCommand.Lift
-            || command == ColorGradingCommand.Gain
-            || command == ColorGradingCommand.Gamma;
-    }
-
-    public enum ColorGradingCommand
-    {
-        Temperature,
-        Tint,
-        PostExposure,
-        ColorFilter,
-        Saturation,
-        Contrast,
-        RedMixerRed = 101,
-        RedMixerGreen = 102,
-        RedMixerBlue = 103,
-        GreenMixerRed = 201,
-        GreenMixerGreen = 202,
-        GreenMixerBlue = 203,
-        BlueMixerRed = 301,
-        BlueMixerGreen = 302,
-        BlueMixerBlue = 303,
-        Lift = 400,
-        Gamma = 500,
-        Gain = 600,
+        public enum ColorGradingCommand
+        {
+            Temperature,
+            Tint,
+            PostExposure,
+            ColorFilter,
+            Saturation,
+            Contrast,
+            RedMixerRed = 101,
+            RedMixerGreen = 102,
+            RedMixerBlue = 103,
+            GreenMixerRed = 201,
+            GreenMixerGreen = 202,
+            GreenMixerBlue = 203,
+            BlueMixerRed = 301,
+            BlueMixerGreen = 302,
+            BlueMixerBlue = 303,
+            Lift = 400,
+            Gamma = 500,
+            Gain = 600,
+        }
     }
 }
 #endif

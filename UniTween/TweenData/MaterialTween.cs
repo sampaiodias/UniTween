@@ -1,114 +1,149 @@
-﻿using DG.Tweening;
-using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Tween Data/Mesh Renderer (Material)", fileName = "New MeshRenderer Tween")]
-public class MaterialTween : TweenData
+﻿namespace UniTween.Data
 {
-    [Space(15)]
-    public MaterialCommand command;
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
 
-    public bool useSharedMaterial;
-    [HideIf("HideColor")]
-    public Color color;
-    [HideIf("HideFloat")]
-    public float to;
-    [ShowIf("ShowGradient")]
-    public Gradient gradient;
-    [HideIf("HideVector2")]
-    public Vector2 vector2;
-    [ShowIf("ShowVector4")]
-    public Vector4 vector4;
-    [ShowIf("ShowProperty")]
-    public string property;
-
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Mesh Renderer (Material)", fileName = "New MeshRenderer Tween")]
+    public class MaterialTween : TweenData
     {
-        MeshRenderer meshRenderer = (MeshRenderer)GetComponent(uniTweenTarget);
-        Material mat = useSharedMaterial ? meshRenderer.sharedMaterial : meshRenderer.material;
+        [Space(15)]
+        public MaterialCommand command;
 
-        switch (command)
+        public bool useSharedMaterial;
+        [HideIf("HideColor")]
+        public Color color;
+        [HideIf("HideFloat")]
+        public float to;
+        [ShowIf("ShowGradient")]
+        public Gradient gradient;
+        [HideIf("HideVector2")]
+        public Vector2 vector2;
+        [ShowIf("ShowVector4")]
+        public Vector4 vector4;
+        [ShowIf("ShowProperty")]
+        public string property;
+
+        /// <summary>
+        /// Creates and returns a Tween for all components contained inside the UniTweenTarget.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
+        /// <returns></returns>
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case MaterialCommand.Color:
-                return mat.DOColor(color, duration);
-            case MaterialCommand.ColorProperty:
-                return mat.DOColor(color, property, duration);
-            case MaterialCommand.Fade:
-                return mat.DOFade(to, duration);
-            case MaterialCommand.FadeProperty:
-                return mat.DOFade(to, property, duration);
-            case MaterialCommand.Float:
-                return mat.DOFloat(to, property, duration);
-            case MaterialCommand.GradientColor:
-                return mat.DOGradientColor(gradient, duration);
-            case MaterialCommand.GradientColorProperty:
-                return mat.DOGradientColor(gradient, property, duration);
-            case MaterialCommand.Offset:
-                return mat.DOOffset(vector2, duration);
-            case MaterialCommand.OffsetProperty:
-                return mat.DOOffset(vector2, property, duration);
-            case MaterialCommand.Tiling:
-                return mat.DOTiling(vector2, duration);
-            case MaterialCommand.TilingProperty:
-                return mat.DOTiling(vector2, property, duration);
-            case MaterialCommand.Vector:
-                return mat.DOVector(vector4, property, duration);
-            case MaterialCommand.BlendableColor:
-                return mat.DOBlendableColor(color, duration);
-            case MaterialCommand.BlendableColorProperty:
-                return mat.DOBlendableColor(color, property, duration);
-            default:
-                return null;
+            List<MeshRenderer> renderers = (List<MeshRenderer>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            if (customEase)
+            {
+                foreach (var t in renderers)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in renderers)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
+            }
+            return tweens;
         }
-    }
 
-    private bool HideColor()
-    {
-        return !command.ToString().Contains("Color") || command.ToString().Contains("Gradient");
-    }
+        /// <summary>
+        /// Creates and returns a Tween for the informed component.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public Tween GetTween(MeshRenderer meshRenderer)
+        {
+            Material mat = useSharedMaterial ? meshRenderer.sharedMaterial : meshRenderer.material;
 
-    private bool HideFloat()
-    {
-        return command != MaterialCommand.Fade && command != MaterialCommand.FadeProperty && command != MaterialCommand.Float;
-    }
+            switch (command)
+            {
+                case MaterialCommand.Color:
+                    return mat.DOColor(color, duration);
+                case MaterialCommand.ColorProperty:
+                    return mat.DOColor(color, property, duration);
+                case MaterialCommand.Fade:
+                    return mat.DOFade(to, duration);
+                case MaterialCommand.FadeProperty:
+                    return mat.DOFade(to, property, duration);
+                case MaterialCommand.Float:
+                    return mat.DOFloat(to, property, duration);
+                case MaterialCommand.GradientColor:
+                    return mat.DOGradientColor(gradient, duration);
+                case MaterialCommand.GradientColorProperty:
+                    return mat.DOGradientColor(gradient, property, duration);
+                case MaterialCommand.Offset:
+                    return mat.DOOffset(vector2, duration);
+                case MaterialCommand.OffsetProperty:
+                    return mat.DOOffset(vector2, property, duration);
+                case MaterialCommand.Tiling:
+                    return mat.DOTiling(vector2, duration);
+                case MaterialCommand.TilingProperty:
+                    return mat.DOTiling(vector2, property, duration);
+                case MaterialCommand.Vector:
+                    return mat.DOVector(vector4, property, duration);
+                case MaterialCommand.BlendableColor:
+                    return mat.DOBlendableColor(color, duration);
+                case MaterialCommand.BlendableColorProperty:
+                    return mat.DOBlendableColor(color, property, duration);
+                default:
+                    return null;
+            }
+        }
 
-    private bool ShowGradient()
-    {
-        return command == MaterialCommand.GradientColor || command == MaterialCommand.GradientColorProperty;
-    }
+        private bool HideColor()
+        {
+            return !command.ToString().Contains("Color") || command.ToString().Contains("Gradient");
+        }
 
-    private bool HideVector2()
-    {
-        return !command.ToString().Contains("Offset") || !command.ToString().Contains("Tiling");
-    }
+        private bool HideFloat()
+        {
+            return command != MaterialCommand.Fade && command != MaterialCommand.FadeProperty && command != MaterialCommand.Float;
+        }
 
-    private bool ShowVector4()
-    {
-        return command == MaterialCommand.Vector;
-    }
+        private bool ShowGradient()
+        {
+            return command == MaterialCommand.GradientColor || command == MaterialCommand.GradientColorProperty;
+        }
 
-    private bool ShowProperty()
-    {
-        return command.ToString().Contains("Property") || command == MaterialCommand.Float || command == MaterialCommand.Vector;
-    }
+        private bool HideVector2()
+        {
+            return !command.ToString().Contains("Offset") || !command.ToString().Contains("Tiling");
+        }
 
-    public enum MaterialCommand
-    {
-        Color,
-        ColorProperty,
-        Fade,
-        FadeProperty,
-        Float,
-        GradientColor,
-        GradientColorProperty,
-        Offset,
-        OffsetProperty,
-        Tiling,
-        TilingProperty,
-        Vector,
-        BlendableColor,
-        BlendableColorProperty
+        private bool ShowVector4()
+        {
+            return command == MaterialCommand.Vector;
+        }
+
+        private bool ShowProperty()
+        {
+            return command.ToString().Contains("Property") || command == MaterialCommand.Float || command == MaterialCommand.Vector;
+        }
+
+        public enum MaterialCommand
+        {
+            Color,
+            ColorProperty,
+            Fade,
+            FadeProperty,
+            Float,
+            GradientColor,
+            GradientColorProperty,
+            Offset,
+            OffsetProperty,
+            Tiling,
+            TilingProperty,
+            Vector,
+            BlendableColor,
+            BlendableColorProperty
+        }
     }
 }

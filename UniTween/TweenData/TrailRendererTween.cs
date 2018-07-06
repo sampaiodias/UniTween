@@ -1,42 +1,78 @@
-﻿using DG.Tweening;
-using Sirenix.OdinInspector;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Tween Data/Trail Renderer")]
-public class TrailRendererTween : TweenData
+﻿namespace UniTween.Data
 {
-    [Space(15)]
-    public TrailCommand command;
-    [ShowIf("IsResize")]
-    public float toStartWidth;
-    [ShowIf("IsResize")]
-    public float toEndWidth;
-    [HideIf("IsResize")]
-    public float to;
+    using DG.Tweening;
+    using Sirenix.OdinInspector;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
 
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Trail Renderer")]
+    public class TrailRendererTween : TweenData
     {
-        TrailRenderer trail = (TrailRenderer)GetComponent(uniTweenTarget);
+        [Space(15)]
+        public TrailCommand command;
+        [ShowIf("IsResize")]
+        public float toStartWidth;
+        [ShowIf("IsResize")]
+        public float toEndWidth;
+        [HideIf("IsResize")]
+        public float to;
 
-        switch (command)
+        /// <summary>
+        /// Creates and returns a Tween for all components contained inside the UniTweenTarget.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
+        /// <returns></returns>
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case TrailCommand.Resize:
-                return trail.DOResize(toStartWidth, toEndWidth, duration);
-            case TrailCommand.Time:
-                return trail.DOTime(to, duration);
-            default:
-                return null;
+            List<TrailRenderer> trails = (List<TrailRenderer>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            if (customEase)
+            {
+                foreach (var t in trails)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in trails)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
+            }
+            return tweens;
         }
-    }
 
-    private bool IsResize()
-    {
-        return command == TrailCommand.Resize;
-    }
+        /// <summary>
+        /// Creates and returns a Tween for the informed component.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public Tween GetTween(TrailRenderer trail)
+        {
+            switch (command)
+            {
+                case TrailCommand.Resize:
+                    return trail.DOResize(toStartWidth, toEndWidth, duration);
+                case TrailCommand.Time:
+                    return trail.DOTime(to, duration);
+                default:
+                    return null;
+            }
+        }
 
-    public enum TrailCommand
-    {
-        Resize,
-        Time
+        private bool IsResize()
+        {
+            return command == TrailCommand.Resize;
+        }
+
+        public enum TrailCommand
+        {
+            Resize,
+            Time
+        }
     }
 }

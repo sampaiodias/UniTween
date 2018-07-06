@@ -1,36 +1,72 @@
-﻿using DG.Tweening;
-using UnityEngine;
-using UnityEngine.UI;
-
-[CreateAssetMenu(menuName = "Tween Data/Canvas/Layout Element")]
-public class LayoutElementTween : TweenData
+﻿namespace UniTween.Data
 {
-    [Space(15)]
-    public LayoutElementCommand command;
-    public Vector2 to;
-    public bool snapping;
+    using DG.Tweening;
+    using System.Collections.Generic;
+    using UniTween.Core;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-    public override Tween GetTween(UniTween.UniTweenTarget uniTweenTarget)
+    [CreateAssetMenu(menuName = "Tween Data/Canvas/Layout Element")]
+    public class LayoutElementTween : TweenData
     {
-        LayoutElement element = (LayoutElement)GetComponent(uniTweenTarget);
+        [Space(15)]
+        public LayoutElementCommand command;
+        public Vector2 to;
+        public bool snapping;
 
-        switch (command)
+        /// <summary>
+        /// Creates and returns a Tween for all components contained inside the UniTweenTarget.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
+        /// <returns></returns>
+        public override Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
         {
-            case LayoutElementCommand.FlexibleSize:
-                return element.DOFlexibleSize(to, duration, snapping);
-            case LayoutElementCommand.MinSize:
-                return element.DOMinSize(to, duration, snapping);
-            case LayoutElementCommand.PreferredSize:
-                return element.DOPreferredSize(to, duration, snapping);
-            default:
-                return null;
+            List<LayoutElement> elements = (List<LayoutElement>)GetComponent(uniTweenTarget);
+            Sequence tweens = DOTween.Sequence();
+            if (customEase)
+            {
+                foreach (var t in elements)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in elements)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
+            }
+            return tweens;
         }
-    }
 
-    public enum LayoutElementCommand
-    {
-        FlexibleSize,
-        MinSize,
-        PreferredSize
+        /// <summary>
+        /// Creates and returns a Tween for the informed component.
+        /// The Tween is configured based on the attribute values of this TweenData file.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public Tween GetTween(LayoutElement element)
+        {
+            switch (command)
+            {
+                case LayoutElementCommand.FlexibleSize:
+                    return element.DOFlexibleSize(to, duration, snapping);
+                case LayoutElementCommand.MinSize:
+                    return element.DOMinSize(to, duration, snapping);
+                case LayoutElementCommand.PreferredSize:
+                    return element.DOPreferredSize(to, duration, snapping);
+                default:
+                    return null;
+            }
+        }
+
+        public enum LayoutElementCommand
+        {
+            FlexibleSize,
+            MinSize,
+            PreferredSize
+        }
     }
 }
