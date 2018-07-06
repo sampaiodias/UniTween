@@ -32,14 +32,16 @@ namespace UniTween.Data
             {
                 foreach (var t in volumes)
                 {
-                    tweens.Join(GetTween(t).SetEase(curve));
+                    if (t != null)
+                        tweens.Join(GetTween(t).SetEase(curve));
                 }
             }
             else
             {
                 foreach (var t in volumes)
                 {
-                    tweens.Join(GetTween(t).SetEase(ease));
+                    if (t != null)
+                        tweens.Join(GetTween(t).SetEase(ease));
                 }
             }
             return tweens;
