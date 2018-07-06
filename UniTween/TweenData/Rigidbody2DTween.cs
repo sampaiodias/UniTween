@@ -34,9 +34,19 @@
         {
             List<Rigidbody2D> rigidbodies = (List<Rigidbody2D>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in rigidbodies)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in rigidbodies)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in rigidbodies)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

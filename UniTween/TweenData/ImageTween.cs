@@ -30,9 +30,19 @@
         {
             List<Image> images = (List<Image>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in images)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in images)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in images)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

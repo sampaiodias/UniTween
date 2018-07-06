@@ -28,9 +28,19 @@
         {
             List<ScrollRect> scrolls = (List<ScrollRect>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in scrolls)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in scrolls)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in scrolls)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

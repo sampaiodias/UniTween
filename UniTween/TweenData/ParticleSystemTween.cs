@@ -55,9 +55,19 @@
         {
             List<ParticleSystem> particles = (List<ParticleSystem>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in particles)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in particles)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in particles)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

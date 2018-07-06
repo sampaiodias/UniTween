@@ -22,9 +22,19 @@
         {
             List<AudioSource> sources = (List<AudioSource>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in sources)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in sources)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in sources)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

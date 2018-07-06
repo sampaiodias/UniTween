@@ -30,9 +30,19 @@
         {
             List<SpriteRenderer> spriteRenderers = (List<SpriteRenderer>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in spriteRenderers)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in spriteRenderers)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in spriteRenderers)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

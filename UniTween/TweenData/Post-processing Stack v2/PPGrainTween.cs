@@ -29,9 +29,19 @@ namespace UniTween.Data
         {
             List<PostProcessVolume> volumes = (List<PostProcessVolume>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in volumes)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in volumes)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in volumes)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

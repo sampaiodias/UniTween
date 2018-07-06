@@ -38,9 +38,19 @@
         {
             List<Camera> cameras = (List<Camera>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in cameras)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in cameras)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in cameras)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

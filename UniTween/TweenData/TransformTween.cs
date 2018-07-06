@@ -50,9 +50,19 @@
         {
             List<Transform> transforms = (List<Transform>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in transforms)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in transforms)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in transforms)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }

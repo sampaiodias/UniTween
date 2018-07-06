@@ -24,9 +24,19 @@
         {
             List<Slider> sliders = (List<Slider>)GetComponent(uniTweenTarget);
             Sequence tweens = DOTween.Sequence();
-            foreach (var t in sliders)
+            if (customEase)
             {
-                tweens.Join(GetTween(t));
+                foreach (var t in sliders)
+                {
+                    tweens.Join(GetTween(t).SetEase(curve));
+                }
+            }
+            else
+            {
+                foreach (var t in sliders)
+                {
+                    tweens.Join(GetTween(t).SetEase(ease));
+                }
             }
             return tweens;
         }
