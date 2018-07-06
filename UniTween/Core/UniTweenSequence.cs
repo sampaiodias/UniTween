@@ -438,10 +438,6 @@
         private Tween GetTween(UniTweenObject uniTween)
         {
             Tween t = uniTween.tweenData.GetTween(uniTween.target);
-            if (uniTween.tweenData.customEase)
-                t.SetEase(uniTween.tweenData.curve);
-            else
-                t.SetEase(uniTween.tweenData.ease);
             t.SetDelay(uniTween.tweenData.delay);
             return t;
         }
