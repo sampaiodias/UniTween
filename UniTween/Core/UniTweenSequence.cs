@@ -437,9 +437,13 @@
 
         private Tween GetTween(UniTweenObject uniTween)
         {
-            Tween t = uniTween.tweenData.GetTween(uniTween.target);
-            t.SetDelay(uniTween.tweenData.delay);
-            return t;
+            if (uniTween != null && uniTween.tweenData != null)
+            {
+                Tween t = uniTween.tweenData.GetTween(uniTween.target);
+                t.SetDelay(uniTween.tweenData.delay);
+                return t;
+            }
+            return null;
         }
 
         private bool IsPlaying()
