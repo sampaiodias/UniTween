@@ -63,32 +63,6 @@
 
         #region Tween
         /// <summary>
-        /// Plays a UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
-        /// </summary>
-        /// <param name="id">The ID defined on the UniTween Sequence component</param>
-        public static void Play(string id)
-        {
-            if (id != "")
-            {
-                sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
-
-                foreach (var sequence in sequenceLookup[id])
-                {
-                    sequence.Play();
-                }
-            }
-        }
-
-        /// <summary>
-        /// The same as Play(string id), but this one can be called via UnityEvents and other non-static environments.
-        /// </summary>
-        /// <param name="id">The ID defined on the UniTween Sequence component</param>
-        public void PlayViaID(string id)
-        {
-            Play(id);
-        }
-
-        /// <summary>
         /// Initializes and plays the Sequence. If you already called this once and didn't change 
         /// the Sequence, consider using Resume() for a performance boost.
         /// </summary>
@@ -207,6 +181,116 @@
         public void Kill()
         {
             sq.Kill();
+        }
+        #endregion
+
+        #region TweenWithID
+        /// <summary>
+        /// Plays an UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public static void Play(string id)
+        {
+            Do("play", id);
+        }
+
+        /// <summary>
+        /// Plays backwards an UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public static void PlayBackwards(string id)
+        {
+            Do("playbackwards", id);
+        }
+
+        /// <summary>
+        /// Resumes an UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public static void Resume(string id)
+        {
+            Do("resume", id);
+        }
+
+        /// <summary>
+        /// Pauses an UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public static void Pause(string id)
+        {
+            Do("pause", id);
+        }
+
+        /// <summary>
+        /// Rewinds an UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public static void Rewind(string id)
+        {
+            Do("rewind", id);
+        }
+
+        /// <summary>
+        /// Kills an UniTween Sequence based on an ID (defined on the UniTween Sequence component via inspector). 
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public static void Kill(string id)
+        {
+            Do("kill", id);
+        }
+
+        /// <summary>
+        /// The same as Play(string id), but this one can be called via UnityEvents and other non-static environments.
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public void PlayViaID(string id)
+        {
+            Play(id);
+        }
+
+        /// <summary>
+        /// The same as PlayBackwards(string id), but this one can be called via UnityEvents and other non-static environments.
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public void PlayBackwardsViaID(string id)
+        {
+            PlayBackwards(id);
+        }
+
+        /// <summary>
+        /// The same as Resume(string id), but this one can be called via UnityEvents and other non-static environments.
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public void ResumeViaID(string id)
+        {
+            Resume(id);
+        }
+
+        /// <summary>
+        /// The same as Pause(string id), but this one can be called via UnityEvents and other non-static environments.
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public void PauseViaID(string id)
+        {
+            Pause(id);
+        }
+
+        /// <summary>
+        /// The same as Rewind(string id), but this one can be called via UnityEvents and other non-static environments.
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public void RewindViaID(string id)
+        {
+            Rewind(id);
+        }
+
+        /// <summary>
+        /// The same as Kill(string id), but this one can be called via UnityEvents and other non-static environments.
+        /// </summary>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        public void KillViaID(string id)
+        {
+            Kill(id);
         }
         #endregion
 
@@ -426,6 +510,44 @@
         #endregion
 
         #region Private Methods
+        /// <summary>
+        /// Do something with a Sequence based on the action informed (play, pause, etc.)
+        /// </summary>
+        /// <param name="action">Possible actions: "play", "playbackwards", "resume", "pause", "rewind", "kill"</param>
+        /// <param name="id">The ID defined on the UniTween Sequence component</param>
+        private static void Do(string action, string id)
+        {
+            if (id != "")
+            {
+                sequenceLookup = (Lookup<string, UniTweenSequence>)(sequences.ToLookup(obj => obj.id));
+
+                foreach (var sequence in sequenceLookup[id])
+                {
+                    switch (action)
+                    {
+                        case "play":
+                            sequence.Play();
+                            break;
+                        case "playbackwards":
+                            sequence.PlayBackwards();
+                            break;
+                        case "resume":
+                            sequence.Resume();
+                            break;
+                        case "pause":
+                            sequence.Pause();
+                            break;
+                        case "rewind":
+                            sequence.Rewind();
+                            break;
+                        case "kill":
+                            sequence.Kill();
+                            break;
+                    }
+                }
+            }
+        }
+
         private void CreateNewUniTween()
         {
             for (int i = 0; i < uniTweens.Count; i++)
