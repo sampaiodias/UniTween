@@ -79,7 +79,7 @@ namespace UniTween.Editor
                     {
                         if (SirenixEditorGUI.ToolbarButton(new GUIContent("Select GameObject")))
                         {
-                            Selection.activeGameObject = (((UniTweenSequence)selected.ObjectInstance).gameObject);
+                            Selection.activeGameObject = (((UniTweenSequence)selected.Value).gameObject);
                             EditorGUIUtility.PingObject(Selection.activeGameObject);
                         }
                     }
