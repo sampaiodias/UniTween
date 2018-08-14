@@ -110,6 +110,7 @@ namespace UniTween.Editor
         [HideLabel]
         [PropertyOrder(40)]
         [Title("", "Sequence List")]
+        [ShowInInspector]
         public static string filter;
 
         private void OnInspectorUpdate()
