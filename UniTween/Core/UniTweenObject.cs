@@ -8,7 +8,6 @@
     using UnityEngine.Events;
     using UnityEngine.UI;
 
-    [HelpURL("https://github.com/sampaiodias/UniTween/wiki/")]
     public class UniTweenObject
     {
         [OnValueChanged("NewOperation")]
@@ -36,31 +35,13 @@
 
         private string tweenDataCurrentType;
 
+        /// <summary>
+        /// Calculates and returns a new interval based on the default interval plus its defined variance.
+        /// </summary>
+        /// <returns></returns>
         public float GetInterval()
         {
             return interval + Random.Range(randomVariance.x, randomVariance.y);
-        }
-
-        private void NewOperation()
-        {
-            if (operation == TweenOperation.AppendCallback && unityEvent == null)
-            {
-                unityEvent = new UnityEvent();
-            }
-        }
-
-        private void NewTarget()
-        {
-            if (tweenDataCurrentType == null)
-            {
-                SetCurrentType();
-            }
-
-            if (target == null || (tweenData != null && tweenData.GetType().ToString() != tweenDataCurrentType))
-            {
-                SetCurrentType();
-                SetNewTarget();
-            }
         }
 
         /// <summary>
@@ -217,6 +198,8 @@
                 tweenDataCurrentType = tweenData.GetType().ToString();
         }
 
+#pragma warning disable IDE0051 // Remove unused private member. Note: These are used by Odin Attributes via strings.
+
         private bool ShowTarget()
         {
             return !IsTweenDataNull() && IsTweenOperation();
@@ -232,6 +215,7 @@
             return operation != TweenOperation.AppendCallback && operation != TweenOperation.AppendInterval;
         }
 
+
         private bool IsCallbackOperation()
         {
             return operation == TweenOperation.AppendCallback;
@@ -241,6 +225,29 @@
         {
             return operation == TweenOperation.AppendInterval;
         }
+
+        private void NewOperation()
+        {
+            if (operation == TweenOperation.AppendCallback && unityEvent == null)
+            {
+                unityEvent = new UnityEvent();
+            }
+        }
+
+        private void NewTarget()
+        {
+            if (tweenDataCurrentType == null)
+            {
+                SetCurrentType();
+            }
+
+            if (target == null || (tweenData != null && tweenData.GetType().ToString() != tweenDataCurrentType))
+            {
+                SetCurrentType();
+                SetNewTarget();
+            }
+        }
+#pragma warning restore IDE0051 // Remover membros privados não utilizados
 
         public enum TweenOperation
         {

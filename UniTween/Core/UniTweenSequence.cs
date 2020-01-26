@@ -8,7 +8,7 @@
     using UnityEngine;
 
     [HideMonoScript]
-    [HelpURL("https://github.com/sampaiodias/UniTween/wiki")]
+    [HelpURL("https://github.com/sampaiodias/UniTween/wiki/Getting-Started")]
     public class UniTweenSequence : SerializedMonoBehaviour
     {
         #region Attributes
@@ -509,7 +509,16 @@
         }
         #endregion
 
-        #region Private Methods
+        #region Other Methods
+        /// <summary>
+        /// Returns a list of all active Sequences on the Scene.
+        /// </summary>
+        /// <returns></returns>
+        public static List<UniTweenSequence> GetActiveSequences()
+        {
+            return sequences;
+        }
+
         /// <summary>
         /// Do something with a Sequence based on the action informed (play, pause, etc.)
         /// </summary>
